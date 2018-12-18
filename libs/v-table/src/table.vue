@@ -46,6 +46,8 @@
                                                         v-model="col.filters"
                                                         :show-operation="col.filterMultiple"
                                                         :is-multiple="col.filterMultiple"
+                                                        :confirm-label="confirmLabel"
+                                                        :reset-label="resetLabel"
                                                         @on-filter-method="filterEvent"
                                                         @change="filterConditionChange(col.filterMultiple)"
                                             >
@@ -89,6 +91,8 @@
                                                             v-model="col.filters"
                                                             :show-operation="col.filterMultiple"
                                                             :is-multiple="col.filterMultiple"
+                                                            :confirm-label="confirmLabel"
+                                                            :reset-label="resetLabel"
                                                             @on-filter-method="filterEvent"
                                                             @change="filterConditionChange(col.filterMultiple)"
                                                 >
@@ -582,6 +586,14 @@
             loadingOpacity: {
                 type: Number,
                 default: 0.6
+            },
+            confirmLabel: {
+                type: String,
+                default: 'Ok'
+            },
+            resetLabel: {
+                type: String,
+                default: 'Reset'
             },
             // 表体单元格样式回调
             columnCellClassName: Function,

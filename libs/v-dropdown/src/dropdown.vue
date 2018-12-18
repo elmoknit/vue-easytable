@@ -1,7 +1,8 @@
 <template>
     <dl :class="['v-dropdown',sizeClass]" v-click-outside="clickOutside">
         <dt class="v-dropdown-dt">
-            <a :class="[isSelect ? 'v-dropdown-selected' :'']" @click.stop.prevent="toggleItems()" :style="{'width':width+'px'}">
+            <a :class="[isSelect ? 'v-dropdown-selected' :'']" @click.stop.prevent="toggleItems()"
+               :style="{'width':width+'px'}">
                 <slot></slot>
             </a>
         </dt>
@@ -31,8 +32,8 @@
                 </template>
 
                 <li v-if="showOperation" class="v-dropdown-operation">
-                    <a @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">Ok</a>
-                    <a @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">Reset</a>
+                    <a @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">{{confirmLabel}}</a>
+                    <a @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">{{resetLabel}}</a>
                 </li>
             </ul>
         </dd>
@@ -57,7 +58,7 @@
         directives: {
             'click-outside': clickoutside
         },
-        data(){
+        data() {
             return {
 
                 visible: false,
@@ -73,18 +74,18 @@
                 inputValue: '',
 
                 // 是否有选项被改变（初始值为null 为了区分首次internalOptions 赋值的问题）
-                isOperationChange:null
+                isOperationChange: null
             }
         },
         props: {
             // 如果是select 组件将特殊处理
-            isSelect:{
-                type:Boolean,
-                default:false
+            isSelect: {
+                type: Boolean,
+                default: false
             },
-            showOperation:{
-                type:Boolean,
-                default:false
+            showOperation: {
+                type: Boolean,
+                default: false
             },
             size: {
                 type: String
@@ -141,18 +142,26 @@
             isInput: {
                 type: Boolean,
                 default: false
+            },
+            confirmLabel: {
+                type: String,
+                default: 'Ok'
+            },
+            resetLabel: {
+                type: String,
+                default: 'Reset'
             }
 
         },
         computed: {
 
-            sizeClass(){
+            sizeClass() {
                 let size = settings.sizeMaps[this.size] || settings.sizeMapDefault
                 return size === settings.sizeMaps['large'] ? ' v-dropdown--large' : (size === settings.sizeMaps['middle'] ? ' v-dropdown--middle' : ' v-dropdown--small')
             },
 
             // 获取最大宽度(不设置则是无穷大)
-            getMaxWidth(){
+            getMaxWidth() {
                 var result = Infinity,
                     maxWidth = this.maxWidth,
                     width = this.width;
@@ -168,7 +177,7 @@
         methods: {
 
             // 初始化
-            init(){
+            init() {
                 this.internalOptions = Object.assign([], this.value);
 
                 this.checkboxGroupList = this.selectedLabels();
@@ -180,24 +189,24 @@
             },
 
             // operation filter confirm
-            confirm(){
+            confirm() {
 
-                if (this.isOperationChange){
+                if (this.isOperationChange) {
 
-                    this.$emit('on-filter-method',this.internalOptions);
+                    this.$emit('on-filter-method', this.internalOptions);
                     this.isOperationChange = false;
                 }
                 this.hideDropDown();
             },
 
             // operation filter reset
-            rest(){
+            rest() {
 
-                if (this.internalOptions.some(x=>x.selected)){
+                if (this.internalOptions.some(x => x.selected)) {
 
-                    this.internalOptions.map(x=>{
+                    this.internalOptions.map(x => {
 
-                        if (x.selected){
+                        if (x.selected) {
                             x.selected = false;
                         }
                         return x;
@@ -216,30 +225,30 @@
                     this.isOperationChange = false;*/
                 }
 
-                setTimeout(x=>{
+                setTimeout(x => {
 
                     this.hideDropDown();
-                },50)
+                }, 50)
             },
 
-            hideDropDown(){
+            hideDropDown() {
 
-                if (this.showOperation && this.isOperationChange){
+                if (this.showOperation && this.isOperationChange) {
 
-                    this.$emit('on-filter-method',this.internalOptions);
+                    this.$emit('on-filter-method', this.internalOptions);
                     this.isOperationChange = false;
                 }
 
                 this.visible = false;
             },
 
-            showDropDown(){
+            showDropDown() {
 
                 this.visible = true;
             },
 
             // 设置文本框的值
-            setInputValue(){
+            setInputValue() {
 
                 var result, labels;
 
@@ -252,12 +261,12 @@
             },
 
             // checkbox 选中改变事件
-            checkboxGroupChange(){
+            checkboxGroupChange() {
 
                 this.selectOptionClick();
             },
 
-            toggleItems(){
+            toggleItems() {
 
                 //this.visible = !this.visible;
 
@@ -265,7 +274,7 @@
 
                     this.hideDropDown();
 
-                }else{
+                } else {
 
                     this.showDropDown();
 
@@ -275,7 +284,7 @@
                 }
             },
 
-            selectOptionClick(item){
+            selectOptionClick(item) {
                 if (!this.isMultiple) {
                     this.internalOptions.map((x) => {
 
@@ -314,14 +323,14 @@
             },
 
             // 获取样式名称
-            getTextAlignClass(){
+            getTextAlignClass() {
 
                 return this.textAlignPrefix + this.textAlign;
 
             },
 
             // 当前选中项的label
-            selectedLabels(){
+            selectedLabels() {
 
                 return this.internalOptions.filter(x => x.selected).map(x => {
 
@@ -331,14 +340,14 @@
                 });
             },
 
-            clickOutside(){
+            clickOutside() {
 
                 this.hideDropDown();
                 //this.visible = false
             },
 
             // 下拉点击显示
-            dropDownClick(){
+            dropDownClick() {
 
                 var dtEle = this.$el.querySelector('.v-dropdown-dt'),
                     ddItem = this.$el.querySelector('.v-dropdown-items');
@@ -347,7 +356,7 @@
             },
 
             // 确定下拉框的位置
-            dropdownAdjust(){
+            dropdownAdjust() {
 
                 var dtEle = this.$el.querySelector('.v-dropdown-dt'),
                     ddItem = this.$el.querySelector('.v-dropdown-items');
@@ -356,11 +365,11 @@
 
         },
 
-        created(){
+        created() {
 
             this.init();
         },
-        mounted(){
+        mounted() {
 
             this.dropdownAdjust();
 
@@ -369,9 +378,9 @@
             'value': function (val) {
                 this.init();
             },
-            'internalOptions':function (val) {
+            'internalOptions': function (val) {
 
-                this.isOperationChange = (this.showOperation && this.isOperationChange !== null) ? true :false;
+                this.isOperationChange = (this.showOperation && this.isOperationChange !== null) ? true : false;
             }
         }
     }
