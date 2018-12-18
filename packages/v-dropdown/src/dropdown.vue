@@ -31,8 +31,8 @@
                 </template>
 
                 <li v-if="showOperation" class="v-dropdown-operation">
-                    <a @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">确认</a>
-                    <a @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">重置</a>
+                    <a @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">Ok</a>
+                    <a @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">Reset</a>
                 </li>
             </ul>
         </dd>
