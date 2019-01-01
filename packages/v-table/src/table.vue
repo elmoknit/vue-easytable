@@ -51,7 +51,7 @@
                                                         @on-filter-method="filterEvent"
                                                         @change="filterConditionChange(col.filterMultiple)"
                                             >
-                                                <i :class="['v-table-filter-icon',vTableFiltersIcon(col.filters)]"></i>
+                                                <i :class="['fas fa-filter',vTableFiltersIcon(col.filters)]"></i>
                                             </v-dropdown>
                                         </div>
                                     </td>
