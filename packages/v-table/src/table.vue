@@ -1,10 +1,10 @@
 <template>
     <div class="v-table-views v-table-class"
          :style="{'width': internalWidth+'px', 'height': getTableHeight+'px','background-color':tableBgColor}">
-        <!--左列-->
+        <!--Left column-->
         <template v-if="frozenCols.length > 0">
             <div class="v-table-leftview" :style="{'width':leftViewWidth+'px'}">
-                <!--左列头-->
+                <!--Left column-->
                 <div class="v-table-header v-table-title-class"
                      :style="{'width': leftViewWidth+'px','background-color':titleBgColor}">
                     <div class="v-table-header-inner" style="display: block;">
@@ -48,6 +48,7 @@
                                                         :is-multiple="col.filterMultiple"
                                                         :confirm-label="confirmLabel"
                                                         :reset-label="resetLabel"
+                                                        :placeholder-search="placeholderSearch"
                                                         @on-filter-method="filterEvent"
                                                         @change="filterConditionChange(col.filterMultiple)"
                                             >
@@ -93,6 +94,7 @@
                                                             :is-multiple="col.filterMultiple"
                                                             :confirm-label="confirmLabel"
                                                             :reset-label="resetLabel"
+                                                            :placeholder-search="placeholderSearch"
                                                             @on-filter-method="filterEvent"
                                                             @change="filterConditionChange(col.filterMultiple)"
                                                 >
@@ -106,7 +108,7 @@
                         </table>
                     </div>
                 </div>
-                <!--左列内容-->
+                <!--Left column content-->
                 <div class="v-table-body v-table-body-class"
                      :style="{'width': leftViewWidth+'px', 'height': bodyViewHeight+'px'}">
                     <div :class="['v-table-body-inner',vTableBodyInner]">
@@ -123,7 +125,7 @@
                                         :colSpan="setColRowSpan(rowIndex,col.field,item).colSpan"
                                         :rowSpan="setColRowSpan(rowIndex,col.field,item).rowSpan"
                                         :class="[setColumnCellClassName(rowIndex,col.field,item)]">
-                                        <!--存在列合并-->
+                                        <!--Column merge-->
                                         <div v-if="isCellMergeRender(rowIndex,col.field,item)"
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                              :style="{'width':getRowWidthByColSpan(rowIndex,col.field,item)+'px','height': getRowHeightByRowSpan(rowIndex,col.field,item)+'px','line-height':getRowHeightByRowSpan(rowIndex,col.field,item)+'px','text-align':col.columnAlign}"
@@ -139,7 +141,7 @@
                                         </span>
                                             <span v-else v-html="cellMerge(rowIndex,item,col.field).content"></span>
                                         </div>
-                                        <!--不存在列合并-->
+                                        <!--No column merge-->
                                         <div v-else
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                              :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
@@ -187,10 +189,10 @@
                 </div>
             </div>
         </template>
-        <!--右列-->
+        <!--Right column-->
         <div class="v-table-rightview"
              :style="{'width': rightViewWidth+'px'}">
-            <!--右列头-->
+            <!--Right column-->
             <div class="v-table-header v-table-title-class"
                  :style="{'width': (rightViewWidth-1)+'px','background-color':titleBgColor}">
                 <div class="v-table-header-inner" style="display: block;">
@@ -231,6 +233,9 @@
                                                     v-model="col.filters"
                                                     :show-operation="col.filterMultiple"
                                                     :is-multiple="col.filterMultiple"
+                                                    :confirm-label="confirmLabel"
+                                                    :reset-label="resetLabel"
+                                                    :placeholder-search="placeholderSearch"
                                                     @on-filter-method="filterEvent"
                                                     @change="filterConditionChange(col.filterMultiple)"
                                         >
@@ -272,6 +277,9 @@
                                             <!--filters-->
                                             <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters)"
                                                         v-model="col.filters"
+                                                        :confirm-label="confirmLabel"
+                                                        :reset-label="resetLabel"
+                                                        :placeholder-search="placeholderSearch"
                                                         :show-operation="col.filterMultiple"
                                                         :is-multiple="col.filterMultiple"
                                                         @on-filter-method="filterEvent"
@@ -288,7 +296,7 @@
                     </table>
                 </div>
             </div>
-            <!--右列内容-->
+            <!--Right column content-->
             <div :class="['v-table-body v-table-body-class',vTableRightBody]"
                  :style="{'width': rightViewWidth+'px', 'height': bodyViewHeight+'px'}">
                 <v-checkbox-group v-model="checkboxGroupModel" @change="handleCheckGroupChange">
@@ -305,7 +313,7 @@
                                 :colSpan="setColRowSpan(rowIndex,col.field,item).colSpan"
                                 :rowSpan="setColRowSpan(rowIndex,col.field,item).rowSpan"
                                 :class="[setColumnCellClassName(rowIndex,col.field,item)]">
-                                <!--存在列合并-->
+                                <!--Column merge-->
                                 <div v-if="isCellMergeRender(rowIndex,col.field,item)"
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                      :style="{'width':getRowWidthByColSpan(rowIndex,col.field,item)+'px','height': getRowHeightByRowSpan(rowIndex,col.field,item)+'px','line-height':getRowHeightByRowSpan(rowIndex,col.field,item)+'px','text-align':col.columnAlign}"
@@ -321,7 +329,7 @@
                                     <span v-else v-html="cellMerge(rowIndex,item,col.field).content">
                                 </span>
                                 </div>
-                                <!--不存在列合并-->
+                                <!--No column merge-->
                                 <div v-else
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                      :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
@@ -386,7 +394,7 @@
                 :loading-opacity="loadingOpacity"
         ></loading>
 
-        <!--列拖动时的线条-->
+        <!--Line when the column is dragged-->
         <div v-show="isDragging" class="v-table-drag-line"></div>
     </div>
 </template>
@@ -594,6 +602,10 @@
             resetLabel: {
                 type: String,
                 default: 'Reset'
+            },
+            placeholderSearch:{
+                type: String,
+                default: 'Search'
             },
             // 表体单元格样式回调
             columnCellClassName: Function,

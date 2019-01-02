@@ -8,7 +8,6 @@
         </dt>
         <dd v-show="visible" class="v-dropdown-dd">
             <ul class="v-dropdown-items" :style="{'min-width':width+'px','max-width':getMaxWidth+'px'}">
-
                 <template v-if="isMultiple">
                     <v-checkbox-group is-vertical-show
                                       :min="min"
@@ -16,16 +15,17 @@
                                       @change="checkboxGroupChange"
                                       v-model="checkboxGroupList"
                     >
-                        <li v-for="item in internalOptions"
+                        <li v-for="item in filteredInternalOptions"
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
+                            <b-input type="text" ref="inputSearch" :placeholder="placeholderSearch" v-model="search" />
                             <v-checkbox :key="item.label" :label="item.label"
                                         :showLine="item.showLine"></v-checkbox>
                         </li>
                     </v-checkbox-group>
                 </template>
                 <template v-else>
-                    <li v-for="item in internalOptions" @click.stop="selectOptionClick(item)"
+                    <li v-for="item in filteredInternalOptions" @click.stop="selectOptionClick(item)"
                         :class="['v-dropdown-items-li',item.selected ? 'active' : '']">
                         <a :class="['v-dropdown-items-li-a',getTextAlignClass()]" href="javascript:void(0);">{{item.label}}</a>
                     </li>
@@ -74,7 +74,9 @@
                 inputValue: '',
 
                 // 是否有选项被改变（初始值为null 为了区分首次internalOptions 赋值的问题）
-                isOperationChange: null
+                isOperationChange: null,
+
+                search: ''
             }
         },
         props: {
@@ -150,6 +152,10 @@
             resetLabel: {
                 type: String,
                 default: 'Reset'
+            },
+            placeholderSearch: {
+                type: String,
+                default: 'Search'
             }
 
         },
@@ -172,6 +178,12 @@
                 }
 
                 return result;
+            },
+
+            filteredInternalOptions(){
+                return this.internalOptions.filter(filter => {
+                    return filter.label.toLowerCase().indexOf(this.search.toLowerCase())>=0;
+                });
             }
         },
         methods: {
@@ -179,6 +191,7 @@
             // 初始化
             init() {
                 this.internalOptions = Object.assign([], this.value);
+
 
                 this.checkboxGroupList = this.selectedLabels();
 
@@ -201,7 +214,7 @@
 
             // operation filter reset
             rest() {
-
+                this.search = '';
                 if (this.internalOptions.some(x => x.selected)) {
 
                     this.internalOptions.map(x => {
@@ -243,8 +256,8 @@
             },
 
             showDropDown() {
-
                 this.visible = true;
+
             },
 
             // 设置文本框的值
