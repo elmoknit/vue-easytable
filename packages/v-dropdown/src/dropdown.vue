@@ -15,7 +15,7 @@
                                       @change="checkboxGroupChange"
                                       v-model="checkboxGroupList"
                     >
-                        <b-input type="text" ref="inputSearch" :placeholder="placeholderSearch" v-model="search" />
+                        <b-input type="text" autofocus :placeholder="placeholderSearch" v-model="search" />
                         <li v-for="item in filteredInternalOptions"
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
@@ -258,7 +258,6 @@
 
             showDropDown() {
                 this.visible = true;
-
             },
 
             // 设置文本框的值
