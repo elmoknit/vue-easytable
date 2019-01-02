@@ -15,10 +15,11 @@
                                       @change="checkboxGroupChange"
                                       v-model="checkboxGroupList"
                     >
+                        <b-input type="text" ref="inputSearch" :placeholder="placeholderSearch" v-model="search" />
                         <li v-for="item in filteredInternalOptions"
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
-                            <b-input type="text" ref="inputSearch" :placeholder="placeholderSearch" v-model="search" />
+
                             <v-checkbox :key="item.label" :label="item.label"
                                         :showLine="item.showLine"></v-checkbox>
                         </li>
