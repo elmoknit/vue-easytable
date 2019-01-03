@@ -20,7 +20,7 @@
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
 
-                            <v-checkbox :key="item.label" :label="item.label"
+                            <v-checkbox :key="item.label" :label="item.label | highlight(search)"
                                         :showLine="item.showLine"></v-checkbox>
                         </li>
                     </v-checkbox-group>
@@ -185,6 +185,19 @@
                 return this.internalOptions.filter(filter => {
                     return filter.label.toLowerCase().indexOf(this.search.toLowerCase())>=0;
                 });
+            }
+        },
+        filters: {
+            highlight: function (words, query) {
+                if(query){
+                    let iQuery = new RegExp(query, "ig");
+                    return words.toString().replace(iQuery, function(matchedTxt,a,b){
+                        return ('<span class=\'highlight\'>' + matchedTxt + '</span>');
+                    });
+                }else{
+                    return words;
+                }
+
             }
         },
         methods: {

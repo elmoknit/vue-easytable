@@ -11,7 +11,7 @@
 
             <span class="v-checkbox-inner"></span>
         </span>
-        <span><slot v-if="showSlot">{{ label }}</slot></span>
+        <span><slot v-if="showSlot"><span v-html="label" /></slot></span>
     </label>
 </template>
 

@@ -603,7 +603,7 @@
                 type: String,
                 default: 'Reset'
             },
-            placeholderSearch:{
+                placeholderSearch:{
                 type: String,
                 default: 'Search'
             },
