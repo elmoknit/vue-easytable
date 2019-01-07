@@ -157,12 +157,12 @@
                                             <span v-else-if="typeof col.formatter==='function'"
                                                   v-html="col.formatter(item,rowIndex,pagingIndex,col.field)"></span>
                                             <span v-else-if="col.type === 'selection'">
-                                            <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
-                                                        :disabled="item._disabled" :label="rowIndex"></v-checkbox>
-                                        </span>
+                                                <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
+                                                            :disabled="item._disabled" :label="rowIndex"></v-checkbox>
+                                            </span>
                                             <span v-else>
                                                 {{item[col.field]}}
-                                        </span>
+                                            </span>
                                         </div>
                                     </td>
                                 </tr>

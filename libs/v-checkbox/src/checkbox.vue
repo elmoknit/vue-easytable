@@ -4,7 +4,7 @@
             <input
                     class="v-checkbox-input"
                     type="checkbox"
-                    :value="label"
+                    :value="freeLabel"
                     v-model="model"
                     @change="change"
             />
@@ -26,6 +26,10 @@
             },
             // use in checkbox-group
             label: {
+                type: [String, Number],
+                require: true
+            },
+            freeLabel:{
                 type: [String, Number],
                 require: true
             },
@@ -92,7 +96,7 @@
 
                 if (this.isCheckBoxGroup) {
 
-                    this._checkboxGroup.updateModel(this.label, checked);
+                    this._checkboxGroup.updateModel(this.freeLabel, checked);
                 }
             },
 
@@ -103,7 +107,7 @@
                     let checkboxGroup = this._checkboxGroup;
                     if (Array.isArray(checkboxGroup.value) && checkboxGroup.value.length > 0) {
 
-                        if (checkboxGroup.value.indexOf(this.label) > -1) {
+                        if (checkboxGroup.value.indexOf(this.freeLabel) > -1) {
 
                             this.model = true;
                         }
@@ -125,7 +129,7 @@
             // 父组件调用更新 model
             updateModelByGroup(checkBoxGroup){
 
-                if (checkBoxGroup.indexOf(this.label) > -1) {
+                if (checkBoxGroup.indexOf(this.freeLabel) > -1) {
 
                     if (!this.disabled){
                         this.model = true;

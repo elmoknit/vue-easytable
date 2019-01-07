@@ -21,7 +21,7 @@
                         >
 
                             <v-checkbox :key="item.label" :label="item.label | highlight(search)"
-                                        :showLine="item.showLine"></v-checkbox>
+                                        :showLine="item.showLine" :freeLabel="item.label"></v-checkbox>
                         </li>
                     </v-checkbox-group>
                 </template>
