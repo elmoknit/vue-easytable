@@ -11,7 +11,7 @@ export default {
         // 初始化 columns filters
         initColumnsFilters(){
 
-            // 如果是复杂表头
+            // If it is a complex header
             if (this.isComplexTitle) {
 
                 this.internalTitleRows.forEach(rows => {
@@ -20,7 +20,7 @@ export default {
 
                         if (this.enableFilters(col.filters, col.fields) && !col.filterMultiple) {
 
-                            col.filters.unshift({label: '全部', value: this.filterSpecialValue, selected: true});
+                            col.filters.unshift({label: 'All', value: this.filterSpecialValue, selected: true});
                         }
                     })
                 })
@@ -30,7 +30,7 @@ export default {
 
                     if (this.enableFilters(col.filters) && !col.filterMultiple) {
 
-                        col.filters.unshift({label: '全部', value: this.filterSpecialValue, selected: true});
+                        col.filters.unshift({label: 'All', value: this.filterSpecialValue, selected: true});
                     }
                 })
             }

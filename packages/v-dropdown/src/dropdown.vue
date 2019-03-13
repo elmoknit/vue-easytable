@@ -15,7 +15,7 @@
                                       @change="checkboxGroupChange"
                                       v-model="checkboxGroupList"
                     >
-                        <b-input type="text" ref="inputsearch" :placeholder="placeholderSearch" v-model="search" />
+                        <b-input type="text" ref="inputsearch" :placeholder="placeholderSearch" v-model="search"/>
                         <li v-for="item in filteredInternalOptions"
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
@@ -181,20 +181,20 @@
                 return result;
             },
 
-            filteredInternalOptions(){
+            filteredInternalOptions() {
                 return this.internalOptions.filter(filter => {
-                    return filter.label.toLowerCase().indexOf(this.search.toLowerCase())>=0;
+                    return filter.label.toLowerCase().indexOf(this.search.toLowerCase()) >= 0;
                 });
             }
         },
         filters: {
             highlight: function (words, query) {
-                if(query){
+                if (query) {
                     let iQuery = new RegExp(query, "ig");
-                    return words.toString().replace(iQuery, function(matchedTxt,a,b){
+                    return words.toString().replace(iQuery, function (matchedTxt, a, b) {
                         return ('<span class=\'highlight\'>' + matchedTxt + '</span>');
                     });
-                }else{
+                } else {
                     return words;
                 }
 
@@ -202,7 +202,7 @@
         },
         methods: {
 
-            // 初始化
+            // initialization
             init() {
                 this.internalOptions = Object.assign([], this.value);
 

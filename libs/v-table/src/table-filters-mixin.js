@@ -24,7 +24,7 @@ exports.default = {
 
                         if (_this.enableFilters(col.filters, col.fields) && !col.filterMultiple) {
 
-                            col.filters.unshift({ label: '全部', value: _this.filterSpecialValue, selected: true });
+                            col.filters.unshift({ label: 'All', value: _this.filterSpecialValue, selected: true });
                         }
                     });
                 });
@@ -34,7 +34,7 @@ exports.default = {
 
                     if (_this.enableFilters(col.filters) && !col.filterMultiple) {
 
-                        col.filters.unshift({ label: '全部', value: _this.filterSpecialValue, selected: true });
+                        col.filters.unshift({ label: 'All', value: _this.filterSpecialValue, selected: true });
                     }
                 });
             }

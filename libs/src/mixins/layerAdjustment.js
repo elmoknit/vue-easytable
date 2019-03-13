@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _utils = require('../utils/utils');
+var _utils = require("../utils/utils");
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -17,7 +17,8 @@ exports.default = {
         layerAdjustmentOnce: function layerAdjustmentOnce(layerElement, targetElement, distance) {
 
             var viewportOffset = _utils2.default.getViewportOffset(targetElement),
-                layerElemHeight = typeof layerElement.getBoundingClientRect !== "undefined" ? layerElement.getBoundingClientRect().height : layerElement.clientHeight;
+                layerElemHeight = typeof layerElement.getBoundingClientRect !== "undefined" ? layerElement.getBoundingClientRect().height : layerElement.clientHeight,
+                layerElemWidth = typeof layerElement.getBoundingClientRect !== "undefined" ? layerElement.getBoundingClientRect().width : layerElement.clientWidth;
 
             if (viewportOffset.bottom < layerElemHeight) {
 
@@ -27,7 +28,14 @@ exports.default = {
                 layerElement.style.top = viewportOffset.top + targetElement.clientHeight + distance + 'px';
             }
 
-            layerElement.style.left = viewportOffset.left + 'px';
+            console.log('layerElemWidth: ' + layerElemWidth);
+            console.log('viewportOffset.left: ' + viewportOffset.left);
+            console.log('targetElement.clientWidth: ' + targetElement.clientWidth);
+            if (viewportOffset.left < layerElemWidth) {
+                layerElement.style.left = viewportOffset.left - layerElemWidth - distance + 'px';
+            } else {
+                layerElement.style.left = viewportOffset.left + targetElement.clientWidth - distance + 'px';
+            }
         },
         layerAdjustmentBind: function layerAdjustmentBind(layerElement, targetElement, distance) {
             var _this = this;
