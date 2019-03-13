@@ -31,7 +31,7 @@ export default {
                 layerElement.style.left = (viewportOffset.left - layerElemWidth) + 'px';
             } else {
                 layerElement.style.left = viewportOffset.left + 'px';
-            }
+
         },
 
         /*
