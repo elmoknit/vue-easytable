@@ -6,7 +6,7 @@ export default {
     methods: {
 
         /*
-         * 自动调整浮层（不绑定事件）
+         * Automatically adjust the floating layer (no binding event)
          *
          * @method layerAdjustmentBind
          * @param  {Dom}        layerElement        Floating layer element
@@ -27,19 +27,15 @@ export default {
                 layerElement.style.top = (viewportOffset.top + targetElement.clientHeight + distance) + 'px';
             }
 
-            console.log('window.innerWidth: ' +  window.innerWidth)
-            console.log('layerElemWidth: ' + layerElemWidth);
-            console.log('viewportOffset.left: ' + viewportOffset.left);
-            console.log('targetElement.clientWidth: ' + targetElement.clientWidth);
             if ((viewportOffset.left+ layerElemWidth + distance) > window.innerWidth) {
-                layerElement.style.left = (viewportOffset.left - layerElemWidth - distance) + 'px';
+                layerElement.style.left = (viewportOffset.left - layerElemWidth) + 'px';
             } else {
                 layerElement.style.left = viewportOffset.left + 'px';
             }
         },
 
         /*
-         * 滚动时自动调整浮层
+         * Automatically adjust the floating layer when scrolling
          *
          * @method layerAdjustmentBind
          * @param  {Dom}        layerElement        Floating layer element
