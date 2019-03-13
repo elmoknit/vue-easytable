@@ -9,14 +9,14 @@
                  v-html="getCurrentContent"></div>
         </div>
 
-        <!--Table without data scroll bar-->
-        <div class="v-table-empty-scroll"
-             :style="{'height':contentHeight+'px','width':width+'px','top':titleHeight+'px'}">
-            <div class="v-table-empty-inner"
-                 :style="{'height':contentHeight+'px','width':'100%','line-height':contentHeight+'px'}"
-                 v-html="getCurrentContent"></div>
-            <!--<div class="v-table-empty-inner" :style="{'height':'1px','width':totalColumnsWidth+'px'}" v-html="getCurrentContent"></div>-->
-        </div>
+        <!--&lt;!&ndash;Table without data scroll bar&ndash;&gt;-->
+        <!--<div class="v-table-empty-scroll"-->
+             <!--:style="{'height':contentHeight+'px','width':width+'px','top':titleHeight+'px'}">-->
+            <!--<div class="v-table-empty-inner"-->
+                 <!--:style="{'height':contentHeight+'px','width':'100%','line-height':contentHeight+'px'}"-->
+                 <!--v-html="getCurrentContent"></div>-->
+            <!--&lt;!&ndash;<div class="v-table-empty-inner" :style="{'height':'1px','width':totalColumnsWidth+'px'}" v-html="getCurrentContent"></div>&ndash;&gt;-->
+        <!--</div>-->
 
     </div>
 
