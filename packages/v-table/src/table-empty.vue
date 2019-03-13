@@ -1,7 +1,7 @@
 <template>
 
     <div class="v-table-empty">
-        <!--表格无数据的提示信息-->
+        <!--Form no data prompt message-->
         <div class="v-table-empty-content"
              :style="{'height':contentHeight+'px','width':width+'px','top':titleHeight+'px'}">
             <div class="v-table-empty-inner"
@@ -9,10 +9,10 @@
                  v-html="getCurrentContent"></div>
         </div>
 
-        <!--表格无数据的滚动条-->
+        <!--Table without data scroll bar-->
         <div class="v-table-empty-scroll"
              :style="{'height':contentHeight+'px','width':width+'px','top':titleHeight+'px'}">
-            <div class="v-table-empty-inner" :style="{'height':'1px','width':totalColumnsWidth+'px'}"></div>
+            <div class="v-table-empty-inner" :style="{'height':'1px','width':totalColumnsWidth+'px'}"  v-html="getCurrentContent"></div>
         </div>
 
     </div>
@@ -25,25 +25,13 @@
     export default{
 
         props: {
-
-            // 表头的宽度
             titleHeight: [Number, String],
-
-            // 内容显示的高度
             contentHeight: [Number, String],
-
-            // 显示的宽度
             width: [Number, String],
-
-            // 所有列的宽度和
             totalColumnsWidth: [Number, String],
-
-            // 没数据时显示的内容
             errorContent: {
                 type: [String]
             },
-
-            // 是否正在加载
             isLoading: [Boolean]
 
         },
