@@ -32,7 +32,7 @@ exports.default = {
             console.log('layerElemWidth: ' + layerElemWidth);
             console.log('viewportOffset.left: ' + viewportOffset.left);
             console.log('targetElement.clientWidth: ' + targetElement.clientWidth);
-            if (viewportOffset.left > window.innerWidth) {
+            if (viewportOffset.left + layerElemWidth + distance > window.innerWidth) {
                 layerElement.style.left = viewportOffset.left - layerElemWidth - distance + 'px';
             } else {
                 layerElement.style.left = viewportOffset.left + 'px';
