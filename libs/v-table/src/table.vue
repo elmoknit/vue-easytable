@@ -560,7 +560,7 @@
             },
             loadingContent: {
                 type: String,
-                default: '<span><i class="v-icon-spin5 animate-loading-23" style="font-size: 28px;opacity:0.6;"></i></span>'
+                default: '<span><i class="fas fa-spinner animate-loading-23" style="font-size: 28px;opacity:0.6;"></i></span>'
             },
             // 不设置则没有hover效果
             rowHoverColor: {
