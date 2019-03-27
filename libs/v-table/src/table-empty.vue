@@ -1,6 +1,7 @@
 <template>
 
     <div class="v-table-empty">
+        <div v-if="isEmpty" v-html="loadingContent"></div>
         <!--Form no data prompt message-->
         <div class="v-table-empty-content"
              :style="{'height':contentHeight+'px','width':width+'px','top':titleHeight+'px'}">
@@ -31,6 +32,11 @@
             totalColumnsWidth: [Number, String],
             errorContent: {
                 type: [String]
+            },
+            isEmpty: [Boolean],
+            loadingContent: {
+                type: String,
+                default: '<span><i class="v-icon-spin5 animate-loading-23" style="font-size: 28px;opacity:0.6;"></i></span>'
             },
             isLoading: [Boolean]
 

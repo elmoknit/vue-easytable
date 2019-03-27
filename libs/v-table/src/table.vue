@@ -377,6 +377,8 @@
         </div>
 
         <table-empty v-if="isTableEmpty"
+                     :isEmpty="columns.length <= 0"
+                     :loading-content="loadingContent"
                      :width="internalWidth"
                      :total-columns-width="totalColumnsWidth"
                      :content-height="errorContentHeight"
@@ -384,6 +386,7 @@
                      :error-content="errorContent"
                      :is-loading="isLoading"
         ></table-empty>
+
 
         <loading
                 v-if="isLoading"
