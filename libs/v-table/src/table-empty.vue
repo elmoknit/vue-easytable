@@ -1,7 +1,7 @@
 <template>
 
     <div class="v-table-empty">
-        <div v-if="isEmpty" v-html="loadingContent"></div>
+        <div id="columns-loading" v-if="isEmpty" v-html="loadingContent"></div>
         <!--Form no data prompt message-->
         <div class="v-table-empty-content"
              :style="{'height':contentHeight+'px','width':width+'px','top':titleHeight+'px'}">
