@@ -9,13 +9,13 @@
         <dd v-show="visible" class="v-dropdown-dd">
             <ul class="v-dropdown-items" :style="{'min-width':width+'px','max-width':getMaxWidth+'px'}">
                 <template v-if="isMultiple">
+                    <b-input type="text" ref="inputsearch" :placeholder="placeholderSearch" v-model="search"/>
                     <v-checkbox-group is-vertical-show
                                       :min="min"
                                       :max="max"
                                       @change="checkboxGroupChange"
                                       v-model="checkboxGroupList"
                     >
-                        <b-input type="text" ref="inputsearch" :placeholder="placeholderSearch" v-model="search"/>
                         <li v-for="item in filteredInternalOptions"
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
