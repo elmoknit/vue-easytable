@@ -37,8 +37,8 @@
                                                 <span v-else v-html="col.title"></span>
                                                 <span @click.stop="sortControl(col.fields[0])"
                                                       class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i :class='["v-icon-up-dir",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
-                                                        <i :class='["v-icon-down-dir",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
+                                                        <i :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
+                                                        <i :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
                                                 </span>
                                             </span>
                                             <!--filters-->
@@ -83,8 +83,8 @@
                                                     <span v-else v-html="col.title"></span>
                                                     <span @click.stop="sortControl(col.field)"
                                                           class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                            <i :class='["v-icon-up-dir",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
-                                                            <i :class='["v-icon-down-dir",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
+                                                            <i :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
+                                                            <i :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
                                                     </span>
                                                 </span>
                                                 <!--filters-->
@@ -224,8 +224,8 @@
                                             <span v-else v-html="col.title"></span>
                                             <span @click.stop="sortControl(col.fields[0])"
                                                   class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i :class='["v-icon-up-dir",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
-                                                        <i :class='["v-icon-down-dir",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
+                                                        <i :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
+                                                        <i :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
                                             </span>
                                         </span>
                                         <!--filters-->
@@ -271,8 +271,8 @@
                                             <span @click.stop="sortControl(col.field)"
                                                   class="v-table-sort-icon"
                                                   v-if="enableSort(col.orderBy)">
-                                                        <i :class='["v-icon-up-dir",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
-                                                        <i :class='["v-icon-down-dir",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
+                                                        <i :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
+                                                        <i :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
                                             </span>
                                             <!--filters-->
                                             <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters)"
