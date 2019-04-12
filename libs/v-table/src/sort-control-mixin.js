@@ -48,6 +48,43 @@ exports.default = {
 
             return this.sortColumns[field];
         },
+
+        sortControlAsc: function sortcontrolAsc(field) {
+            var orderBy = this.sortColumns[field];
+
+            if (this.enableSort(orderBy)) {
+                this.sortColumns[field] = orderBy === 'asc' ? '' : 'asc';
+
+                if (!this.multipleSort) {
+                    for (var col in this.sortColumns) {
+                        if (col !== field) {
+                            this.sortColumns[col] = '';
+                        }
+                    }
+                }
+                this.$emit('sort-change', this.sortColumns);
+            }
+        },
+        sortControlDesc: function sortControlDesc(field) {
+            var orderBy = this.sortColumns[field];
+
+            if (this.enableSort(orderBy)) {
+                this.sortColumns[field] = orderBy === 'desc' ? '' : 'desc';
+
+                if (!this.multipleSort) {
+
+                    for (var col in this.sortColumns) {
+
+                        if (col !== field) {
+
+                            this.sortColumns[col] = '';
+                        }
+                    }
+                }
+
+                this.$emit('sort-change', this.sortColumns);
+            }
+        },
         sortControl: function sortControl(field) {
 
             var orderBy = this.sortColumns[field];

@@ -3,7 +3,7 @@
  * */
 export default {
 
-    data(){
+    data() {
 
         return {
             sortColumns: {}
@@ -12,11 +12,11 @@ export default {
 
     methods: {
         // 是否允许排序
-        enableSort(val){
+        enableSort(val) {
             return typeof val === 'string' ? true : false;
         },
         // 允许排序的列集合
-        setSortColumns(){
+        setSortColumns() {
             var self = this, sortColumns = {},
                 titleRowsToSortInfo = [];
 
@@ -45,13 +45,48 @@ export default {
         },
 
         // 获取当前排序规则
-        getCurrentSort(field){
+        getCurrentSort(field) {
 
             return this.sortColumns[field];
         },
+        sortControlAsc: function sortcontrolAsc(field) {
+            var orderBy = this.sortColumns[field];
 
+            if (this.enableSort(orderBy)) {
+                this.sortColumns[field] = orderBy === 'asc' ? '' : 'asc';
+
+                if (!this.multipleSort) {
+                    for (var col in this.sortColumns) {
+                        if (col !== field) {
+                            this.sortColumns[col] = '';
+                        }
+                    }
+                }
+                this.$emit('sort-change', this.sortColumns);
+            }
+        },
+        sortControlDesc: function sortControlDesc(field) {
+            var orderBy = this.sortColumns[field];
+
+            if (this.enableSort(orderBy)) {
+                this.sortColumns[field] = orderBy === 'desc' ? '' : 'desc';
+
+                if (!this.multipleSort) {
+
+                    for (var col in this.sortColumns) {
+
+                        if (col !== field) {
+
+                            this.sortColumns[col] = '';
+                        }
+                    }
+                }
+
+                this.$emit('sort-change', this.sortColumns);
+            }
+        },
         // 排序控制
-        sortControl(field){
+        sortControl(field) {
 
             let orderBy = this.sortColumns[field];
 
@@ -66,7 +101,7 @@ export default {
                         (this.sortColumns[field] === 'desc' ? '' : 'asc');
                 }
 
-                if (!this.multipleSort){
+                if (!this.multipleSort) {
 
                     for (var col in this.sortColumns) {
 
@@ -83,7 +118,7 @@ export default {
         },
 
         // 单排时只允许保留第一个排序规则（‘asc’或者‘desc’）
-        singleSortInit(){
+        singleSortInit() {
 
             var self = this,
                 result = false;
@@ -102,7 +137,7 @@ export default {
         },
 
         // 对外暴露的方法（重置排序规则）
-        resetOrder(){
+        resetOrder() {
 
             this.setSortColumns();
 
