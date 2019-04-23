@@ -1,11 +1,11 @@
 import utils from '../../src/utils/utils.js'
-import {hasClass, addClass, removeClass} from '../../src/utils/dom.js'
+import {addClass, hasClass, removeClass} from '../../src/utils/dom.js'
 
 export default {
 
     methods: {
         // cell edit
-        cellEdit(e, callback, rowIndex, rowData, field){
+        cellEdit(e, callback, rowIndex, rowData, field) {
 
             let target = e.target,
                 self = this,
@@ -20,10 +20,10 @@ export default {
                 target = target.parentNode;
             }
 
-            // 子节点（span节点）
+            // Child node (span node)
             childTarget = target.children[0];
 
-            // 把子节点影藏掉
+            // Hide the child nodes
             childTarget.style.display = 'none';
 
             if (hasClass(target, 'cell-editing')) {
@@ -35,7 +35,6 @@ export default {
             oldVal = childTarget.innerText.trim();
 
             if (target.style.textAlign) {
-
                 textAlign = target.style.textAlign;
             }
 
@@ -75,7 +74,13 @@ export default {
                     childTarget.style.display = '';
 
                     // fixed this.value bug in IE9
-                    callback(editInput.value, oldVal);
+                    callback({
+                        newValue: editInput.value,
+                        oldValue: oldVal,
+                        rowIndex: rowIndex,
+                        rowData: rowData,
+                        field: field
+                    });
 
                     utils.unbind(editInput, 'blur', actionFun);
                     utils.unbind(editInput, 'keydown', actionFun);
@@ -88,19 +93,13 @@ export default {
             utils.bind(editInput, 'blur', actionFun);
             utils.bind(editInput, 'keydown', actionFun);
         },
-
+        setCellEditDone(payload) {
+            this.cellEditDone && this.cellEditDone(payload.newValue, payload.oldValue, payload.rowIndex, payload.rowData, payload.field);
+        },
         // 单元格点击
-        cellEditClick(e, isEdit, rowData, field, rowIndex){
+        cellEditClick(e, isEdit, rowData, field, rowIndex) {
             if (isEdit) {
-
-                let self = this;
-                // 单元格内容变化后的回调
-                let onCellEditCallBack = function (newValue, oldVal) {
-
-                    self.cellEditDone && self.cellEditDone(newValue, oldVal, rowIndex, rowData, field);
-                }
-
-                this.cellEdit(e, onCellEditCallBack, rowIndex, rowData, field)
+                this.cellEdit(e, this.setCellEditDone, rowIndex, rowData, field)
             }
         },
     }

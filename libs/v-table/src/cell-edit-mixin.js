@@ -43,7 +43,6 @@ exports.default = {
             oldVal = childTarget.innerText.trim();
 
             if (target.style.textAlign) {
-
                 textAlign = target.style.textAlign;
             }
 
@@ -82,7 +81,13 @@ exports.default = {
 
                     childTarget.style.display = '';
 
-                    callback(editInput.value, oldVal);
+                    callback({
+                        newValue: editInput.value,
+                        oldValue: oldVal,
+                        rowIndex: rowIndex,
+                        rowData: rowData,
+                        field: field
+                    });
 
                     _utils2.default.unbind(editInput, 'blur', _actionFun);
                     _utils2.default.unbind(editInput, 'keydown', _actionFun);
@@ -94,17 +99,12 @@ exports.default = {
             _utils2.default.bind(editInput, 'blur', _actionFun);
             _utils2.default.bind(editInput, 'keydown', _actionFun);
         },
+        setCellEditDone: function setCellEditDone(payload) {
+            this.cellEditDone && this.cellEditDone(payload.newValue, payload.oldValue, payload.rowIndex, payload.rowData, payload.field);
+        },
         cellEditClick: function cellEditClick(e, isEdit, rowData, field, rowIndex) {
             if (isEdit) {
-
-                var self = this;
-
-                var onCellEditCallBack = function onCellEditCallBack(newValue, oldVal) {
-
-                    self.cellEditDone && self.cellEditDone(newValue, oldVal, rowIndex, rowData, field);
-                };
-
-                this.cellEdit(e, onCellEditCallBack, rowIndex, rowData, field);
+                this.cellEdit(e, this.setCellEditDone, rowIndex, rowData, field);
             }
         }
     }

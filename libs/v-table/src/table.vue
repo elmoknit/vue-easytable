@@ -128,7 +128,7 @@
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                              :style="{'width':getRowWidthByColSpan(rowIndex,col.field,item)+'px','height': getRowHeightByRowSpan(rowIndex,col.field,item)+'px','line-height':getRowHeightByRowSpan(rowIndex,col.field,item)+'px','text-align':col.columnAlign}"
                                              :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
-                                             @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,item,col.field,rowIndex)"
+                                             @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,col.editType,item,col.field,rowIndex)"
                                              @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
                                         >
                                         <span v-if="cellMergeContentType(rowIndex,col.field,item).isComponent">
@@ -144,12 +144,17 @@
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                              :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                              :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
-                                             @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,item,col.field,rowIndex)"
+                                             @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,col.editType,item,col.field,rowIndex)"
                                              @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
                                         >
                                         <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0">
                                             <component :rowData="item" :field="col.field ? col.field : ''"
                                                        :index="rowIndex" :is="col.componentName"
+                                                       @on-custom-comp="customCompFunc"></component>
+                                        </span>
+                                            <span v-if="typeof col.editComponentName ==='string' && col.editComponentName.length > 0">
+                                            <component :rowData="item" :field="col.field ? col.field : ''"
+                                                       :index="rowIndex" :is="col.editComponentName"
                                                        @on-custom-comp="customCompFunc"></component>
                                         </span>
                                             <span v-else-if="typeof col.formatter==='function'"
@@ -313,7 +318,7 @@
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                      :style="{'width':getRowWidthByColSpan(rowIndex,col.field,item)+'px','height': getRowHeightByRowSpan(rowIndex,col.field,item)+'px','line-height':getRowHeightByRowSpan(rowIndex,col.field,item)+'px','text-align':col.columnAlign}"
                                      :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
-                                     @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,item,col.field,rowIndex)"
+                                     @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,col.editType,item,col.field,rowIndex)"
                                      @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
                                 >
                                 <span v-if="cellMergeContentType(rowIndex,col.field,item).isComponent">
@@ -329,15 +334,17 @@
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                      :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                      :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
-                                     @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,item,col.field,rowIndex)"
-                                     @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
                                 >
                                 <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0">
                                     <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex"
                                                :is="col.componentName" @on-custom-comp="customCompFunc"></component>
                                 </span>
-                                    <span v-else-if="typeof col.formatter==='function'"
-                                          v-html="col.formatter(item,rowIndex,pagingIndex,col.field)">
+                                <span v-if="col.isEdit && typeof col.editComponentName ==='string' && col.editComponentName.length > 0">
+                                    <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex" :oldValue="item[col.field]"
+                                           :is="col.editComponentName" v-on:editCell="setCellEditDone($event)"></component>
+                                </span>
+                                <span v-else-if="typeof col.formatter==='function'"
+                                      v-html="col.formatter(item,rowIndex,pagingIndex,col.field)">
                                 </span>
                                     <span v-else-if="col.type === 'selection'">
                                         <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
@@ -428,20 +435,20 @@
         components: {tableEmpty, loading, VCheckboxGroup, VCheckbox, VDropdown},
         data(){
             return {
-                // 本地列表数据
+                // Local list data
                 internalTableData: [],
-                // 本地宽度
+                // Local width
                 internalWidth: 0,
-                // 本地高度
+                // Local height
                 internalHeight: 0,
-                // 本地列数据
+                // Local column data
                 internalColumns: [],
-                // 本地复杂表头数据
+                // Local complex header data
                 internalTitleRows: [],
                 errorMsg: ' V-Table error: ',
-                // 最大宽度（当width:'max'时）
+                // Maximum width (when width: 'max')
                 maxWidth: 5000,
-                hasFrozenColumn: false,// 是否拥有固定列（false时最后一列的右边border无边框）
+                hasFrozenColumn: false,// Whether there is a fixed column (false, the right border of the last column has no border)
                 resizeTimer: null
             }
         },
@@ -463,18 +470,18 @@
                 type: Number,
                 default: 38
             },
-            // 随着浏览器窗口改变，横向自适应
+            // Horizontal adaptation as the browser window changes
             isHorizontalResize: {
                 type: Boolean,
                 default: false
             },
-            // 随着浏览器窗口改变，垂直自适应
+            // Vertical adaptation as the browser window changes
             isVerticalResize: {
                 type: Boolean,
                 default: false
             },
 
-            // 垂直自适应偏移量
+            // Vertical adaptive offset
             verticalResizeOffset: {
                 type: Number,
                 default: 0
@@ -733,7 +740,7 @@
                 return this.columnCellClassName && this.columnCellClassName(rowIndex, field, rowData);
             },
 
-            // 获取每个表头列的宽度
+            // Get the width of each header column
             titleColumnWidth(fields){
                 var result = 0;
                 if (Array.isArray(fields)) {
@@ -793,7 +800,7 @@
 
             },
 
-            // 当宽度设置 && 非固定列未设置宽度时（列自适应）初始化列集合
+            // nitialize column set when width setting && non-fixed column is not set width (column adaptive)
             initColumns(){
 
                 this.internalHeight = this.height;
@@ -839,10 +846,10 @@
             },
 
 
-            // 当没设置宽度和高度时动态计算
+            // Dynamic calculation when width and height are not set
             initView(){
 
-                // 当没有设置宽度计算总宽度
+                // Calculate the total width when no width is set
                 if (!(this.internalWidth && this.internalWidth > 0)) {
 
                     if (this.columns && this.columns.length > 0) {
@@ -853,7 +860,7 @@
 
                 var totalColumnsHeight = this.getTotalColumnsHeight();
 
-                // 当没有设置高度时计算总高度 || 设置的高度大于所有列高度之和时
+                // Calculate total height when no height is set || Set the height greater than the sum of all column heights
                 if (!(this.height && this.height > 0) || this.height > totalColumnsHeight) {
 
                     if (!this.isVerticalResize) {
