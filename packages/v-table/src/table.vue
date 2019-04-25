@@ -36,12 +36,15 @@
                                                 </span>
                                                 <span v-else v-html="col.title"></span>
                                                 <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i @click.stop="sortControlAsc(col.fields[0])" :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
-                                                        <i @click.stop="sortControlDesc(col.fields[0])" :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
+                                                        <i @click.stop="sortControlAsc(col.fields[0])"
+                                                           :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
+                                                        <i @click.stop="sortControlDesc(col.fields[0])"
+                                                           :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
                                                 </span>
                                             </span>
                                             <!--filters-->
-                                            <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters,col.fields)"
+                                            <v-dropdown class="v-table-dropdown"
+                                                        v-if="enableFilters(col.filters,col.fields)"
                                                         v-model="col.filters"
                                                         :show-operation="col.filterMultiple"
                                                         :is-multiple="col.filterMultiple"
@@ -81,23 +84,25 @@
                                                     </span>
                                                     <span v-else v-html="col.title"></span>
                                                     <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                            <i @click.stop="sortControlAsc(col.field)" :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
-                                                            <i @click.stop="sortControlDesc(col.field)" :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
+                                                            <i @click.stop="sortControlAsc(col.field)"
+                                                               :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
+                                                            <i @click.stop="sortControlDesc(col.field)"
+                                                               :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
                                                     </span>
                                                 </span>
-                                                <!--filters-->
-                                                <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters)"
-                                                            v-model="col.filters"
-                                                            :show-operation="col.filterMultiple"
-                                                            :is-multiple="col.filterMultiple"
-                                                            :confirm-label="confirmLabel"
-                                                            :reset-label="resetLabel"
-                                                            :placeholder-search="placeholderSearch"
-                                                            @on-filter-method="filterEvent"
-                                                            @change="filterConditionChange(col.filterMultiple)"
-                                                >
-                                                    <i :class="['fas fa-filter',vTableFiltersIcon(col.filters)]"></i>
-                                                </v-dropdown>
+                                            <!--filters-->
+                                            <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters)"
+                                                        v-model="col.filters"
+                                                        :show-operation="col.filterMultiple"
+                                                        :is-multiple="col.filterMultiple"
+                                                        :confirm-label="confirmLabel"
+                                                        :reset-label="resetLabel"
+                                                        :placeholder-search="placeholderSearch"
+                                                        @on-filter-method="filterEvent"
+                                                        @change="filterConditionChange(col.filterMultiple)"
+                                            >
+                                                <i :class="['fas fa-filter',vTableFiltersIcon(col.filters)]"></i>
+                                            </v-dropdown>
                                         </div>
                                     </td>
                                 </tr>
@@ -150,11 +155,6 @@
                                         <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0">
                                             <component :rowData="item" :field="col.field ? col.field : ''"
                                                        :index="rowIndex" :is="col.componentName"
-                                                       @on-custom-comp="customCompFunc"></component>
-                                        </span>
-                                            <span v-if="typeof col.editComponentName ==='string' && col.editComponentName.length > 0">
-                                            <component :rowData="item" :field="col.field ? col.field : ''"
-                                                       :index="rowIndex" :is="col.editComponentName"
                                                        @on-custom-comp="customCompFunc"></component>
                                         </span>
                                             <span v-else-if="typeof col.formatter==='function'"
@@ -226,12 +226,15 @@
                                             </span>
                                             <span v-else v-html="col.title"></span>
                                             <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i @click.stop="sortControlAsc(col.fields[0])" :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
-                                                        <i @click.stop="sortControlDesc(col.fields[0])" :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
+                                                        <i @click.stop="sortControlAsc(col.fields[0])"
+                                                           :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
+                                                        <i @click.stop="sortControlDesc(col.fields[0])"
+                                                           :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
                                             </span>
                                         </span>
                                         <!--filters-->
-                                        <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters,col.fields)"
+                                        <v-dropdown class="v-table-dropdown"
+                                                    v-if="enableFilters(col.filters,col.fields)"
                                                     v-model="col.filters"
                                                     :show-operation="col.filterMultiple"
                                                     :is-multiple="col.filterMultiple"
@@ -271,8 +274,10 @@
                                             </span>
                                             <span v-else v-html="col.title"></span>
                                             <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i @click.stop="sortControlAsc(col.field)" :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
-                                                        <i @click.stop="sortControlDesc(col.field)" :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
+                                                        <i @click.stop="sortControlAsc(col.field)"
+                                                           :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
+                                                        <i @click.stop="sortControlDesc(col.field)"
+                                                           :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
                                             </span>
                                             <!--filters-->
                                             <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters)"
@@ -339,12 +344,14 @@
                                     <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex"
                                                :is="col.componentName" @on-custom-comp="customCompFunc"></component>
                                 </span>
-                                <span v-if="col.isEdit && typeof col.editComponentName ==='string' && col.editComponentName.length > 0">
-                                    <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex" :oldValue="item[col.field]"
-                                           :is="col.editComponentName" v-on:editCell="setCellEditDone($event)"></component>
+                                    <span v-if="col.isEdit && typeof col.editComponentName ==='string' && col.editComponentName.length > 0">
+                                    <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex"
+                                               :oldValue="item[col.field]"
+                                               :is="col.editComponentName"
+                                               v-on:editCell="setCellEditDone($event)"></component>
                                 </span>
-                                <span v-else-if="typeof col.formatter==='function'"
-                                      v-html="col.formatter(item,rowIndex,pagingIndex,col.field)">
+                                    <span v-else-if="typeof col.formatter==='function'"
+                                          v-html="col.formatter(item,rowIndex,pagingIndex,col.field)">
                                 </span>
                                     <span v-else-if="col.type === 'selection'">
                                         <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
@@ -433,7 +440,7 @@
         name: 'v-table',
         mixins: [classesMixin, tableResizeMixin, frozenColumnsMixin, scrollControlMixin, sortControlMixin, tableEmptyMixin, dragWidthMixin, cellEditMixin, bodyCellMergeMixin, titleCellMergeMixin, checkboxSelectionMixin, tableFooterMixin, scrollBarControlMixin, tableRowMouseEventsMixin, tableFiltersMixin],
         components: {tableEmpty, loading, VCheckboxGroup, VCheckbox, VDropdown},
-        data(){
+        data() {
             return {
                 // Local list data
                 internalTableData: [],
@@ -605,7 +612,7 @@
                 type: String,
                 default: 'Reset'
             },
-                placeholderSearch:{
+            placeholderSearch: {
                 type: String,
                 default: 'Search'
             },
@@ -641,19 +648,19 @@
         computed: {
 
             // 是否是复杂表头
-            isComplexTitle(){
+            isComplexTitle() {
 
                 return (Array.isArray(this.internalTitleRows) && this.internalTitleRows.length > 0);
             },
 
             // 获取表格高度
-            getTableHeight(){
+            getTableHeight() {
 
                 return this.isTableEmpty ? this.tableEmptyHeight : this.internalHeight;
             },
 
             // 左侧区域宽度
-            leftViewWidth(){
+            leftViewWidth() {
                 var result = 0
                 if (this.hasFrozenColumn) {
                     result = this.frozenCols.reduce((total, curr) => total + curr.width, 0);
@@ -661,7 +668,7 @@
                 return result
             },
             // 右侧区域宽度
-            rightViewWidth(){
+            rightViewWidth() {
 
                 let result = this.internalWidth - this.leftViewWidth;
 
@@ -669,7 +676,7 @@
             },
 
             // 左侧、右侧区域高度
-            bodyViewHeight(){
+            bodyViewHeight() {
                 var result;
                 if (this.internalTitleRows.length > 0) {
 
@@ -685,14 +692,14 @@
             },
 
             // 所有列的总宽度
-            totalColumnsWidth(){
+            totalColumnsWidth() {
                 return this.internalColumns.reduce(function (total, curr) {
                     return curr.width ? (total + curr.width) : total;
                 }, 0)
             },
 
             // 获取未固定列的总宽度
-            totalNoFrozenColumnsWidth(){
+            totalNoFrozenColumnsWidth() {
 
                 return this.noFrozenCols.reduce(function (total, curr) {
                     return curr.width ? (total + curr.width) : total;
@@ -700,21 +707,21 @@
             },
 
             // 获取所有的字段
-            getColumnsFields(){
+            getColumnsFields() {
                 return this.internalColumns.map((item) => {
                     return item.field;
                 })
             },
 
             // 获取非固定列的字段集合
-            getNoFrozenColumnsFields(){
+            getNoFrozenColumnsFields() {
                 return this.internalColumns.filter(x => !x.isFrozen).map((item) => {
                     return item.field;
                 })
             },
 
             // 获取固定列的字段集合
-            getFrozenColumnsFields(){
+            getFrozenColumnsFields() {
                 return this.internalColumns.filter(x => x.isFrozen).map((item) => {
                     return item.field;
                 })
@@ -722,26 +729,26 @@
         },
         methods: {
             // custom columns component event
-            customCompFunc(params){
+            customCompFunc(params) {
 
                 this.$emit('on-custom-comp', params);
             },
 
             // 行颜色
-            trBgColor(num){
+            trBgColor(num) {
                 if ((this.evenBgColor && this.evenBgColor.length > 0) || (this.oddBgColor && this.oddBgColor.length > 0)) {
                     return num % 2 === 0 ? {'background-color': this.evenBgColor} : {'background-color': this.oddBgColor};
                 }
             },
 
             // 设置 column 列的样式
-            setColumnCellClassName(rowIndex, field, rowData){
+            setColumnCellClassName(rowIndex, field, rowData) {
 
                 return this.columnCellClassName && this.columnCellClassName(rowIndex, field, rowData);
             },
 
             // Get the width of each header column
-            titleColumnWidth(fields){
+            titleColumnWidth(fields) {
                 var result = 0;
                 if (Array.isArray(fields)) {
                     var matchItems = this.internalColumns.filter((item, index) => {
@@ -756,7 +763,7 @@
             },
 
             // 获取每个表头列的高度
-            titleColumnHeight(rowspan){
+            titleColumnHeight(rowspan) {
                 if (rowspan && rowspan > 0) {
                     return this.titleRowHeight * rowspan;
                 } else {
@@ -765,7 +772,7 @@
             },
 
             // 超出的title提示
-            overflowTitle(row, rowIndex, col){
+            overflowTitle(row, rowIndex, col) {
 
                 var result = '';
                 if (typeof col.formatter === 'function') {
@@ -783,7 +790,7 @@
             },
 
             // 获取所有列的总高度
-            getTotalColumnsHeight(){
+            getTotalColumnsHeight() {
 
                 var titleTotalHeight = (this.internalTitleRows && this.internalTitleRows.length > 0) ? this.titleRowHeight * this.internalTitleRows.length : this.titleRowHeight;
 
@@ -794,14 +801,14 @@
 
 
             // 初始化width
-            initTableWidth(){
+            initTableWidth() {
 
                 this.internalWidth = this.isHorizontalResize ? this.maxWidth : this.width;
 
             },
 
             // nitialize column set when width setting && non-fixed column is not set width (column adaptive)
-            initColumns(){
+            initColumns() {
 
                 this.internalHeight = this.height;
 
@@ -847,7 +854,7 @@
 
 
             // Dynamic calculation when width and height are not set
-            initView(){
+            initView() {
 
                 // Calculate the total width when no width is set
                 if (!(this.internalWidth && this.internalWidth > 0)) {
@@ -874,13 +881,13 @@
                 }
             },
 
-            initInternalTableData(){
+            initInternalTableData() {
 
                 return Array.isArray(this.tableData) ? deepClone(this.tableData) : [];
             },
 
             // 对外暴露（隐藏显示切换时）
-            resize(){
+            resize() {
                 // fixed bug in IE9 #17
                 this.resizeTimer = setTimeout(x => {
 
@@ -888,7 +895,7 @@
                 })
             }
         },
-        created(){
+        created() {
 
             this.internalTableData = this.initInternalTableData(this.tableData);
 
@@ -901,7 +908,7 @@
 
             this.initView();
         },
-        mounted(){
+        mounted() {
 
             this.setScrollbarWidth();
 
@@ -969,7 +976,7 @@
                 }
             }
         },
-        beforeDestroy(){
+        beforeDestroy() {
 
             clearTimeout(this.resizeTimer);
         }
