@@ -40,7 +40,7 @@ export default {
             })
 
             this.sortColumns = sortColumns;
-
+            this.$emit('sort-change', this.sortColumns);
             this.singleSortInit();
         },
 
