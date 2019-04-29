@@ -41,7 +41,7 @@ exports.default = {
             });
 
             this.sortColumns = sortColumns;
-
+            this.$emit('sort-change', this.sortColumns);
             this.singleSortInit();
         },
         getCurrentSort: function getCurrentSort(field) {
