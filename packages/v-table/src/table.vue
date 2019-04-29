@@ -35,9 +35,9 @@
                                                 </span>
                                                 <span v-else v-html="col.title"></span>
                                                 <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i @click.stop="sortControlAsc(col.fields[0])"
+                                                        <i :data-testid="col.field + '_sortAsc'" @click.stop="sortControlAsc(col.fields[0])"
                                                            :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
-                                                        <i @click.stop="sortControlDesc(col.fields[0])"
+                                                        <i :data-testid="col.field + '_sortDesc'" @click.stop="sortControlDesc(col.fields[0])"
                                                            :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
                                                 </span>
                                             </span>
@@ -83,9 +83,9 @@
                                                     </span>
                                                     <span v-else v-html="col.title"></span>
                                                     <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                            <i @click.stop="sortControlAsc(col.field)"
+                                                            <i :data-testid="col.field + '_sortAsc'" @click.stop="sortControlAsc(col.field)"
                                                                :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
-                                                            <i @click.stop="sortControlDesc(col.field)"
+                                                            <i :data-testid="col.field + '_sortDesc'" @click.stop="sortControlDesc(col.field)"
                                                                :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
                                                     </span>
                                                 </span>
@@ -226,9 +226,9 @@
                                             </span>
                                             <span v-else v-html="col.title"></span>
                                             <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i @click.stop="sortControlAsc(col.fields[0])"
+                                                        <i :data-testid="col.field + '_sortAsc'" @click.stop="sortControlAsc(col.fields[0])"
                                                            :class='["fas fa-sort-up",getCurrentSort(col.fields[0]) ==="asc" ? "checked":""]'></i>
-                                                        <i @click.stop="sortControlDesc(col.fields[0])"
+                                                        <i :data-testid="col.field + '_sortDesc'" @click.stop="sortControlDesc(col.fields[0])"
                                                            :class='["fas fa-sort-down",getCurrentSort(col.fields[0]) ==="desc" ? "checked":""]'></i>
                                             </span>
                                         </span>
@@ -274,9 +274,9 @@
                                             </span>
                                             <span v-else v-html="col.title"></span>
                                             <span class="v-table-sort-icon" v-if="enableSort(col.orderBy)">
-                                                        <i @click.stop="sortControlAsc(col.field)"
+                                                        <i :data-testid="col.field + '_sortAsc'" @click.stop="sortControlAsc(col.field)"
                                                            :class='["fas fa-sort-up",getCurrentSort(col.field) ==="asc" ? "checked":""]'></i>
-                                                        <i @click.stop="sortControlDesc(col.field)"
+                                                        <i  :data-testid="col.field + '_sortDesc'" @click.stop="sortControlDesc(col.field)"
                                                            :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
                                             </span>
                                             <!--filters-->
