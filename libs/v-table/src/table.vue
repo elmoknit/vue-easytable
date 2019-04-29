@@ -16,7 +16,6 @@
                                     <td v-for="col in row"
                                         :class="[col.titleCellClassName]"
                                         :colspan="col.colspan" :rowspan="col.rowspan"
-
                                         @mousemove.stop="handleTitleMouseMove($event,col.fields)"
                                         @mousedown.stop="handleTitleMouseDown($event)"
                                         @mouseout.stop="handleTitleMouseOut()"
@@ -146,6 +145,7 @@
                                         </div>
                                         <!--No column merge-->
                                         <div v-else
+                                             :data-testid="col.field + '_index' + rowIndex"
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                              :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                              :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
@@ -336,6 +336,7 @@
                                 </div>
                                 <!--No column merge-->
                                 <div v-else
+                                     :data-testid="col.field + '_index' + rowIndex"
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                      :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                      :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
