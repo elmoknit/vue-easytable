@@ -348,6 +348,7 @@
                                     <span v-if="col.isEdit && typeof col.editComponentName ==='string' && col.editComponentName.length > 0">
                                     <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex"
                                                :oldValue="item[col.field]"
+                                               :selectOptions="col.filters"
                                                :is="col.editComponentName"
                                                v-on:editCell="setCellEditDone($event)"></component>
                                 </span>
