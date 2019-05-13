@@ -20,7 +20,7 @@
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
 
-                            <v-checkbox :key="item.label" :label="item.label | highlight(search)"
+                            <v-checkbox :data-testid="item.label + '_option_filter'" :key="item.label" :label="item.label | highlight(search)"
                                         :showLine="item.showLine" :freeLabel="item.label"></v-checkbox>
                         </li>
                     </v-checkbox-group>
