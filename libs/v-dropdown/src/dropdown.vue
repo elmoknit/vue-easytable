@@ -33,8 +33,8 @@
                 </template>
 
                 <li v-if="showOperation" class="v-dropdown-operation">
-                    <a @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">{{confirmLabel}}</a>
-                    <a @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">{{resetLabel}}</a>
+                    <a data-testid="confirm-dropdown" @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">{{confirmLabel}}</a>
+                    <a data-testid="reset-dropdown" @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">{{resetLabel}}</a>
                 </li>
             </ul>
         </dd>
