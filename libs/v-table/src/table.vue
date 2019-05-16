@@ -42,8 +42,7 @@
                                                 </span>
                                             </span>
                                             <!--filters-->
-                                            <v-dropdown :data-testid="col.field + '_filter'"
-                                                        class="v-table-dropdown"
+                                            <v-dropdown class="v-table-dropdown"
                                                         v-if="enableFilters(col.filters,col.fields)"
                                                         v-model="col.filters"
                                                         :show-operation="col.filterMultiple"
@@ -91,8 +90,7 @@
                                                     </span>
                                                 </span>
                                             <!--filters-->
-                                            <v-dropdown :data-testid="col.field + '_filter'"
-                                                        class="v-table-dropdown" v-if="enableFilters(col.filters)"
+                                            <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters)"
                                                         v-model="col.filters"
                                                         :show-operation="col.filterMultiple"
                                                         :is-multiple="col.filterMultiple"
@@ -234,8 +232,7 @@
                                             </span>
                                         </span>
                                         <!--filters-->
-                                        <v-dropdown :data-testid="col.field + '_filter'"
-                                                    class="v-table-dropdown"
+                                        <v-dropdown class="v-table-dropdown"
                                                     v-if="enableFilters(col.filters,col.fields)"
                                                     v-model="col.filters"
                                                     :show-operation="col.filterMultiple"
@@ -282,8 +279,7 @@
                                                            :class='["fas fa-sort-down",getCurrentSort(col.field) ==="desc" ? "checked":""]'></i>
                                             </span>
                                             <!--filters-->
-                                            <v-dropdown :data-testid="col.field + '_filter'"
-                                                        class="v-table-dropdown" v-if="enableFilters(col.filters)"
+                                            <v-dropdown class="v-table-dropdown" v-if="enableFilters(col.filters)"
                                                         v-model="col.filters"
                                                         :confirm-label="confirmLabel"
                                                         :reset-label="resetLabel"
