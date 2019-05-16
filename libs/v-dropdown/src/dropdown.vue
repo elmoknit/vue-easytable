@@ -16,11 +16,11 @@
                                       @change="checkboxGroupChange"
                                       v-model="checkboxGroupList"
                     >
-                        <li v-for="item in filteredInternalOptions"
+                        <li v-for="(item, index) in filteredInternalOptions"
                             :class="['v-dropdown-items-multiple',getTextAlignClass()]"
                         >
 
-                            <v-checkbox :key="item.label" :label="item.label | highlight(search)"
+                            <v-checkbox :data-testid="'dropdown_option_' + index" :key="item.label" :label="item.label | highlight(search)"
                                         :showLine="item.showLine" :freeLabel="item.label"></v-checkbox>
                         </li>
                     </v-checkbox-group>
@@ -33,8 +33,8 @@
                 </template>
 
                 <li v-if="showOperation" class="v-dropdown-operation">
-                    <a @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">{{confirmLabel}}</a>
-                    <a @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">{{resetLabel}}</a>
+                    <a data-testid="confirm-dropdown" @click.stop="confirm" class="v-dropdown-operation-item" href="javascript:void(0)">{{confirmLabel}}</a>
+                    <a data-testid="reset-dropdown" @click.stop="rest" class="v-dropdown-operation-item" href="javascript:void(0)">{{resetLabel}}</a>
                 </li>
             </ul>
         </dd>
