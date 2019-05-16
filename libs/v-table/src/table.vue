@@ -152,17 +152,17 @@
                                              @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
                                         >
                                         <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0">
-                                            <component :data-testid="col.field + '_index'" :rowData="item" :field="col.field ? col.field : ''"
+                                            <component :data-testid="col.field + '_index' + rowIndex" :rowData="item" :field="col.field ? col.field : ''"
                                                        :index="rowIndex" :is="col.componentName"
                                                        @on-custom-comp="customCompFunc"></component>
                                         </span>
                                             <span v-else-if="typeof col.formatter==='function'"
                                                   v-html="col.formatter(item,rowIndex,pagingIndex,col.field)"></span>
-                                            <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index'">
+                                            <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index' + rowIndex">
                                                 <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
                                                             :disabled="item._disabled" :label="rowIndex"></v-checkbox>
                                             </span>
-                                            <span v-else :data-testid="col.field + '_index'">
+                                            <span v-else :data-testid="col.field + '_index' + rowIndex">
                                                 {{item[col.field]}}
                                             </span>
                                         </div>
@@ -339,7 +339,7 @@
                                      :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                      :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
                                 >
-                                <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0" :data-testid="col.field + '_index'">
+                                <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0" :data-testid="col.field + '_index'+ rowIndex">
                                     <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex"
                                                :is="col.componentName" @on-custom-comp="customCompFunc"></component>
                                 </span>
@@ -351,13 +351,13 @@
                                                v-on:editCell="setCellEditDone($event)"></component>
                                 </span>
                                     <span v-else-if="typeof col.formatter==='function'"
-                                          v-html="col.formatter(item,rowIndex,pagingIndex,col.field)" :data-testid="col.field + '_index'">
+                                          v-html="col.formatter(item,rowIndex,pagingIndex,col.field)" :data-testid="col.field + '_index' + rowIndex">
                                 </span>
-                                    <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index'">
+                                    <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index' + rowIndex">
                                         <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
                                                     :disabled="item._disabled" :label="rowIndex"></v-checkbox>
                                 </span>
-                                    <span v-else :data-testid="col.field + '_index'">
+                                    <span v-else :data-testid="col.field + '_index' + rowIndex">
                                      {{item[col.field]}}
                                 </span>
                                 </div>
