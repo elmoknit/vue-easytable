@@ -2,7 +2,7 @@ export default {
 
     computed: {
 
-        // 获取表头行合并的数量
+        // Get the number of header row merges
         getTitleRowspanTotalCount(){
 
             let titleRowspanTotalCount1 = 0,
@@ -10,12 +10,12 @@ export default {
                 rowspanCountArr, minVal;
 
 
-            // 不能用noFrozenTitleCols 要用原始数据处理
+            // Cannot use noFrozenTitleCols to process with raw data
             this.noFrozenTitleCols.forEach(row => {
 
                 rowspanCountArr = this.getTitleRowspanCountArr(row);
 
-                // 如果每一项的rowspan值都大于1则继续处理
+                // if the rowpan value of each item is greater than 1, continue processing
                 if (Array.isArray(rowspanCountArr) && rowspanCountArr.length > 0) {
 
                     minVal = Math.min.apply(null, rowspanCountArr);
@@ -28,7 +28,7 @@ export default {
 
                 rowspanCountArr = this.getTitleRowspanCountArr(row);
 
-                // 如果每一项的rowspan值都大于1则继续处理
+                // if the rowpan value of each item is greater than 1, continue processing
                 if (Array.isArray(rowspanCountArr) && rowspanCountArr.length > 0) {
 
                     minVal = Math.min.apply(null, rowspanCountArr);
