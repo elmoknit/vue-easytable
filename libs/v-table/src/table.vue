@@ -145,7 +145,6 @@
                                         </div>
                                         <!--No column merge-->
                                         <div v-else
-                                             :data-testid="col.field + '_index' + rowIndex"
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                              :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                              :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
@@ -153,17 +152,17 @@
                                              @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
                                         >
                                         <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0">
-                                            <component :rowData="item" :field="col.field ? col.field : ''"
+                                            <component :data-testid="col.field + '_index' + rowIndex" :rowData="item" :field="col.field ? col.field : ''"
                                                        :index="rowIndex" :is="col.componentName"
                                                        @on-custom-comp="customCompFunc"></component>
                                         </span>
                                             <span v-else-if="typeof col.formatter==='function'"
                                                   v-html="col.formatter(item,rowIndex,pagingIndex,col.field)"></span>
-                                            <span v-else-if="col.type === 'selection'">
+                                            <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index' + rowIndex">
                                                 <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
                                                             :disabled="item._disabled" :label="rowIndex"></v-checkbox>
                                             </span>
-                                            <span v-else>
+                                            <span v-else :data-testid="col.field + '_index' + rowIndex">
                                                 {{item[col.field]}}
                                             </span>
                                         </div>
@@ -336,12 +335,11 @@
                                 </div>
                                 <!--No column merge-->
                                 <div v-else
-                                     :data-testid="col.field + '_index' + rowIndex"
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
                                      :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                      :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
                                 >
-                                <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0">
+                                <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0" :data-testid="col.field + '_index'+ rowIndex">
                                     <component :rowData="item" :field="col.field ? col.field : ''" :index="rowIndex"
                                                :is="col.componentName" @on-custom-comp="customCompFunc"></component>
                                 </span>
@@ -353,13 +351,13 @@
                                                v-on:editCell="setCellEditDone($event)"></component>
                                 </span>
                                     <span v-else-if="typeof col.formatter==='function'"
-                                          v-html="col.formatter(item,rowIndex,pagingIndex,col.field)">
+                                          v-html="col.formatter(item,rowIndex,pagingIndex,col.field)" :data-testid="col.field + '_index' + rowIndex">
                                 </span>
-                                    <span v-else-if="col.type === 'selection'">
+                                    <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index' + rowIndex">
                                         <v-checkbox @change="handleCheckChange(item)" :show-slot="false"
                                                     :disabled="item._disabled" :label="rowIndex"></v-checkbox>
                                 </span>
-                                    <span v-else>
+                                    <span v-else :data-testid="col.field + '_index' + rowIndex">
                                      {{item[col.field]}}
                                 </span>
                                 </div>
@@ -677,17 +675,16 @@
                 return this.hasFrozenColumn ? result - 2 : result;
             },
 
-            // 左侧、右侧区域高度
+            // Left and right area height
             bodyViewHeight() {
                 var result;
                 if (this.internalTitleRows.length > 0) {
-
                     result = this.internalHeight - this.titleRowHeight * (this.internalTitleRows.length + this.getTitleRowspanTotalCount);
                 } else {
                     result = this.internalHeight - this.titleRowHeight;
                 }
 
-                // 1px: 当有滚动条时，使滚动条显示全
+                // 1px: When there is a scroll bar, make the scroll bar display full
                 result -= (this.footerTotalHeight + 1);
 
                 return result;
