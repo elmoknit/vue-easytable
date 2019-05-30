@@ -1,7 +1,7 @@
 <template>
     <div style="width:100%;height: 100%;">
         <div class="v-table-loading" :style="{'opacity':loadingOpacity}"></div>
-        <div class="v-table-loading-content" v-html="loadingContent"></div>
+        <div class="v-table-loading-content" data-testid="loading-content" v-html="loadingContent"></div>
     </div>
 
 </template>
