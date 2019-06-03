@@ -1,5 +1,5 @@
 <template>
-    <dl :class="['v-dropdown',sizeClass]" v-click-outside="clickOutside">
+    <dl :class="['v-dropdown',sizeClass]" v-click-outside="clickOutside"  v-on:keyup.enter="confirm">
         <dt class="v-dropdown-dt">
             <a :class="[isSelect ? 'v-dropdown-selected' :'']" @click.stop.prevent="toggleItems()"
                :style="{'width':width+'px'}">
