@@ -115,12 +115,13 @@
                 </div>
                 <!--Left column content-->
                 <div class="v-table-body v-table-body-class"
-                     :style="{'width': leftViewWidth+'px', 'height': bodyViewHeight+'px'}">
+                     :style="{'width': leftViewWidth+'px'}">
                     <div :class="['v-table-body-inner',vTableBodyInner]">
                         <v-checkbox-group v-model="checkboxGroupModel" @change="handleCheckGroupChange">
                             <table class="v-table-btable" cellspacing="0" cellpadding="0" border="0">
                                 <tbody>
                                 <tr v-for="(item,rowIndex) in internalTableData" class="v-table-row"
+                                    :data-leftrowindex="`row${rowIndex}`"
                                     :style="[trBgColor(rowIndex+1)]"
                                     @mouseenter.stop="handleMouseEnter(rowIndex)"
                                     @mouseleave.stop="handleMouseOut(rowIndex)">
@@ -149,7 +150,7 @@
                                         <!--No column merge-->
                                         <div v-else
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                                             :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
+                                             :style="{'width':col.width+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
                                              :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
                                              @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,col.editType,item,col.field,rowIndex)"
                                              @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
@@ -264,7 +265,7 @@
                                     @click.stop="titleCellClick(col.field,col.title);"
                                     @dblclick.stop="titleCellDblClick(col.field,col.title)">
                                     <div :class="['v-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                                         :style="{'width':col.width+'px','height':titleRowHeight+'px','text-align':col.titleAlign}">
+                                         :style="{'width':col.width+'px','text-align':col.titleAlign}">
                                         <span class="table-title">
                                             <span v-if="col.type === 'selection'">
                                                  <v-checkbox
@@ -308,11 +309,12 @@
             </div>
             <!--Right column content-->
             <div :class="['v-table-body v-table-body-class',vTableRightBody]"
-                 :style="{'width': rightViewWidth+'px', 'height': bodyViewHeight+'px'}">
+                 :style="{'width': rightViewWidth+'px'}">
                 <v-checkbox-group v-model="checkboxGroupModel" @change="handleCheckGroupChange">
                     <table class="v-table-btable" cellspacing="0" cellpadding="0" border="0">
                         <tbody>
                         <tr :key="rowIndex" v-for="(item,rowIndex) in internalTableData" class="v-table-row"
+                            :data-rightrowindex="`row${rowIndex}`"
                             :style="[trBgColor(rowIndex+1)]"
                             @mouseenter.stop="handleMouseEnter(rowIndex)"
                             @mouseleave.stop="handleMouseOut(rowIndex)"
@@ -984,6 +986,27 @@
         beforeDestroy() {
 
             clearTimeout(this.resizeTimer);
-        }
+        },
+        updated() {
+            if(!this.isLoading) {
+                for(let i = 0; i < this.internalTableData.length; i++) {
+                    let height = 0;
+
+                    let rightRow = $(`[data-rightrowindex=row${i}]`)[0];
+                    let leftRow = $(`[data-leftrowindex=row${i}]`)[0];
+
+                    if(rightRow && leftRow) {
+                        height = rightRow.offsetHeight > height ? rightRow.offsetHeight : height;
+
+                        height = leftRow.offsetHeight > height ? leftRow.offsetHeight : height;
+
+                        rightRow.style.height = height + "px";
+
+                        leftRow.style.height = height + "px";
+                    }
+                }
+
+            }
+        },
     }
 </script>

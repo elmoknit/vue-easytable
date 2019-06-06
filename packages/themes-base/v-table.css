@@ -72,13 +72,10 @@
 .v-table-body-cell{
     padding:0 3px;
     margin: 0;
-    white-space: nowrap;
     word-wrap: normal;
-    overflow:hidden;
     border-width: 0;
     border-style: solid;
     border-color: rgba(221, 221, 221, 1);
-    text-overflow: ellipsis;
 }
 
 .v-table-body {
