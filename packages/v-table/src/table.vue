@@ -989,24 +989,33 @@
         },
         updated() {
             if(!this.isLoading) {
-                for(let i = 0; i < this.internalTableData.length; i++) {
-                    let height = 0;
+                let cummulHeight = 0
+                for(var i = 0; i < this.internalTableData.length; i++) {
+                    var height = 0
 
-                    let rightRow = $(`[data-rightrowindex=row${i}]`)[0];
-                    let leftRow = $(`[data-leftrowindex=row${i}]`)[0];
+                    var rightRow = $(`[data-rightrowindex=row${i}]`)[0]
+                    var leftRow = $(`[data-leftrowindex=row${i}]`)[0]
 
                     if(rightRow && leftRow) {
                         height = rightRow.offsetHeight > height ? rightRow.offsetHeight : height;
-
                         height = leftRow.offsetHeight > height ? leftRow.offsetHeight : height;
 
                         rightRow.style.height = height + "px";
+                        leftRow.style.height = height + (i===this.internalTableData.length - 1 ? 8 : 0) + "px"
 
-                        leftRow.style.height = height + "px";
+                        if(i===this.internalTableData.length - 1 ){
+                            $(`[data-leftrowindex=row${i}] .v-table-body-cell`)[0].style.height = height + 8 + "px";
+                        }
+
+                        cummulHeight += height;
                     }
                 }
 
+                var tableLeftView = $(".v-table-leftview")[0];
+                if(tableLeftView) {
+                    tableLeftView.style.height = cummulHeight + 46 + "px";
+                }
             }
-        },
+        }
     }
 </script>
