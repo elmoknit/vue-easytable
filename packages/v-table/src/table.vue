@@ -344,7 +344,7 @@
                                 <!--No column merge-->
                                 <div v-else
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                                     :style="{'width':col.width+'px','height': rowHeight+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
+                                     :style="{'width':col.width+'px', 'line-height':rowHeight+'px','text-align':col.columnAlign}"
                                      :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
                                 >
                                 <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0" :data-testid="col.field + '_index'+ rowIndex">
