@@ -344,7 +344,7 @@
                                 <!--No column merge-->
                                 <div v-else
                                      :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                                     :style="{'width':col.width+'px', 'line-height':rowHeight+'px','text-align':col.columnAlign}"
+                                     :style="{'width':col.width+'px', 'text-align':col.columnAlign}"
                                      :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
                                 >
                                 <span v-if="typeof col.componentName ==='string' && col.componentName.length > 0" :data-testid="col.field + '_index'+ rowIndex">
@@ -990,11 +990,11 @@
         updated() {
             if(!this.isLoading) {
                 let cummulHeight = 0
-                for(var i = 0; i < this.internalTableData.length; i++) {
-                    var height = 0
+                for(let i = 0; i < this.internalTableData.length; i++) {
+                    let height = 0
 
-                    var rightRow = $(`[data-rightrowindex=row${i}]`)[0]
-                    var leftRow = $(`[data-leftrowindex=row${i}]`)[0]
+                    let rightRow = $(`[data-rightrowindex=row${i}]`)[0]
+                    let leftRow = $(`[data-leftrowindex=row${i}]`)[0]
 
                     if(rightRow && leftRow) {
                         height = rightRow.offsetHeight > height ? rightRow.offsetHeight : height;
@@ -1011,7 +1011,7 @@
                     }
                 }
 
-                var tableLeftView = $(".v-table-leftview")[0];
+                let tableLeftView = $(".v-table-leftview")[0];
                 if(tableLeftView) {
                     tableLeftView.style.height = cummulHeight + 46 + "px";
                 }
