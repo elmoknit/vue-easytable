@@ -150,7 +150,7 @@
                                         <!--No column merge-->
                                         <div v-else
                                              :class="['v-table-body-cell',showVerticalBorder ? 'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                                             :style="{'width':col.width+'px','line-height':rowHeight+'px','text-align':col.columnAlign}"
+                                             :style="{'width':col.width+'px','text-align':col.columnAlign}"
                                              :title="col.overflowTitle ?  overflowTitle(item,rowIndex,col) :''"
                                              @click.stop="rowCellClick(rowIndex,item,col);cellEditClick($event,col.isEdit,col.editType,item,col.field,rowIndex)"
                                              @dblclick.stop="rowCellDbClick(rowIndex,item,col)"
@@ -265,7 +265,7 @@
                                     @click.stop="titleCellClick(col.field,col.title);"
                                     @dblclick.stop="titleCellDblClick(col.field,col.title)">
                                     <div :class="['v-table-title-cell',showVerticalBorder?'vertical-border':'',showHorizontalBorder?'horizontal-border':'']"
-                                         :style="{'width':col.width+'px','text-align':col.titleAlign}">
+                                         :style="{'width':col.width+'px','height':titleRowHeight+'px','text-align':col.titleAlign}">
                                         <span class="table-title">
                                             <span v-if="col.type === 'selection'">
                                                  <v-checkbox
