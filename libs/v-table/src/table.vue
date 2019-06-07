@@ -992,6 +992,16 @@
         updated() {
             if(!this.isLoading) {
                 let cummulHeight = 0
+
+                for(let i = 0; i < this.internalTableData.length; i++) {
+                    let rightRow = $(`[data-rightrowindex=row${i}]`)[0]
+                    let leftRow = $(`[data-leftrowindex=row${i}]`)[0]
+                    if(rightRow && leftRow) {
+                        rightRow.style.height = null;
+                        leftRow.style.height = null;
+                    }
+                }
+
                 for(let i = 0; i < this.internalTableData.length; i++) {
                     let height = 0
 
@@ -999,15 +1009,14 @@
                     let leftRow = $(`[data-leftrowindex=row${i}]`)[0]
 
                     if(rightRow && leftRow) {
-                        height = rightRow.offsetHeight > height ? rightRow.offsetHeight : height;
                         height = leftRow.offsetHeight > height ? leftRow.offsetHeight : height;
+                        height = rightRow.offsetHeight > height ? rightRow.offsetHeight : height;
 
+                        rightRow.style.height = null;
+                        leftRow.style.height = null;
+
+                        leftRow.style.height = height + "px"
                         rightRow.style.height = height + "px";
-                        leftRow.style.height = height + (i===this.internalTableData.length - 1 ? 8 : 0) + "px"
-
-                        if(i===this.internalTableData.length - 1 ){
-                            $(`[data-leftrowindex=row${i}] .v-table-body-cell`)[0].style.height = height + 8 + "px";
-                        }
 
                         cummulHeight += height;
                     }
@@ -1015,9 +1024,27 @@
 
                 let tableLeftView = $(".v-table-leftview")[0];
                 if(tableLeftView) {
-                    tableLeftView.style.height = cummulHeight + 46 + "px";
+                    tableLeftView.style.height = cummulHeight + "px";
                 }
             }
         }
     }
 </script>
+
+<style lang="css">
+    .v-table-body-inner-pb {
+        padding-bottom: 8px !important;
+    }
+
+    .v-table-leftview {
+        margin-bottom:46px !important;;
+    }
+
+    .v-table-leftview:after {
+        bottom: -46px !important;
+    }
+
+    .v-table-leftview:before {
+        bottom: -46px !important;
+    }
+</style>
