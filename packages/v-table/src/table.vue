@@ -128,6 +128,7 @@
                                     <td v-if="cellMergeInit(rowIndex,col.field,item,true)"
                                         v-for="(col,colIndex) in frozenCols"
                                         :key="colIndex"
+                                        :style="{'height':rowHeight+'px'}"
                                         :colSpan="setColRowSpan(rowIndex,col.field,item).colSpan"
                                         :rowSpan="setColRowSpan(rowIndex,col.field,item).rowSpan"
                                         :class="[setColumnCellClassName(rowIndex,col.field,item)]">
@@ -322,6 +323,7 @@
                             <td v-if="cellMergeInit(rowIndex,col.field,item,false)"
                                 v-for="(col,colIndex) in noFrozenCols"
                                 :key="colIndex"
+                                :style="{'height':rowHeight+'px'}"
                                 :colSpan="setColRowSpan(rowIndex,col.field,item).colSpan"
                                 :rowSpan="setColRowSpan(rowIndex,col.field,item).rowSpan"
                                 :class="[setColumnCellClassName(rowIndex,col.field,item)]">
