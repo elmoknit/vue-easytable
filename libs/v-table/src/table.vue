@@ -1033,7 +1033,7 @@
 
 <style lang="css">
     .v-table-body-inner-pb {
-        padding-bottom: 8px !important;
+        padding-bottom: 9px !important;
     }
 
     .v-table-leftview {
