@@ -73,7 +73,8 @@
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0",
     "webpack-validator": "^2.1.2",
-    "xml-loader": "^1.2.1"
+    "xml-loader": "^1.2.1",
+    "prettier": "1.16.4"
   },
   "scripts": {
     "build": "webpack --env.build",
