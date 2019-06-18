@@ -25,7 +25,7 @@ export default {
             this.scrollbarWidth = utils.getScrollbarWidth();
         },
 
-        hasHorizontalScrollBar(){
+        hasScrollBar(){
             return utils.hasHorizontalScrollBar();
         }
     }

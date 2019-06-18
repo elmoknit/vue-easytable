@@ -1145,7 +1145,7 @@ export default {
   },
   updated() {
 
-    console.log(this.hasHorizontalScrollBar);
+    console.log(this.hasScrollBar);
 
     if (!this.isLoading) {
       let cummulHeight = 0;
