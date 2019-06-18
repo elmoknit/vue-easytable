@@ -32,6 +32,9 @@ exports.default = {
         setScrollbarWidth: function setScrollbarWidth() {
 
             this.scrollbarWidth = _utils2.default.getScrollbarWidth();
+        },
+        hasHorizontalScrollBar: function hasHorizontalScrollBar() {
+            return _utils2.default.hasHorizontalScrollBar();
         }
     }
 

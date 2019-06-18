@@ -105,7 +105,7 @@ export default {
 
     },
 
-    // 是否包含横向滚动条
+    // Whether to include horizontal scroll bars
     hasHorizontalScrollBar(ele){
 
         if (ele) {
