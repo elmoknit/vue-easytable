@@ -268,19 +268,16 @@
         >
           <table class="v-table-ftable" cellspacing="0" cellpadding="0" border="0">
             <tr class="v-table-row" v-for="(item, rowIndex) in frozenFooterCols">
-              <td
-                v-for="(col, colIndex) in item"
-                :class="setFooterCellClassName(true, rowIndex, colIndex, col.content)"
-              >
+              <td :class="setFooterCellClassName(true, rowIndex, 0, item[0].content)">
                 <div
                   :style="{
                     height: footerRowHeight + 'px',
                     'line-height': footerRowHeight + 'px',
-                    width: col.width + 'px',
-                    'text-align': col.align
+                    width: leftViewWidth + 'px',
+                    'text-align': item[0].align
                   }"
                   :class="['v-table-body-cell', vTableBodyCell]"
-                  v-html="col.content"
+                  v-html="item[0].content"
                 ></div>
               </td>
             </tr>
@@ -1181,6 +1178,9 @@ export default {
 
       let tableLeftView = $('.v-table-leftview')[0];
       if (tableLeftView) {
+        if (this.footerTotalHeight > 0) {
+          cummulHeight += this.footerTotalHeight;
+        }
         tableLeftView.style.height = cummulHeight + 'px';
       }
     }
