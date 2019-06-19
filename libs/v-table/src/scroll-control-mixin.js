@@ -13,25 +13,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
     methods: {
         body1Mousewheel: function body1Mousewheel(e) {
-
             var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
-
             var e1 = e.originalEvent || window.event || e;
             var scrollHeight = e1.wheelDelta || e1.detail * -1;
             body2.scrollTop = body2.scrollTop - scrollHeight;
         },
         bodyScrollTop: function bodyScrollTop() {
-
             var body1 = this.$el.querySelector('.v-table-leftview .v-table-body');
             var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
 
             if (body1) {
                 body1.scrollTop = 0;
             }
+
             body2.scrollTop = 0;
         },
-        body2Scroll: function body2Scroll(e) {
-
+        body2Scroll: function body2Scroll() {
             var view2 = this.$el.querySelector('.v-table-rightview');
             var body1 = this.$el.querySelector('.v-table-leftview .v-table-body');
             var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
@@ -43,9 +40,7 @@ exports.default = {
             view2.querySelector('.v-table-header').scrollLeft = body2.scrollLeft;
         },
         rightViewFooterScroll: function rightViewFooterScroll() {
-
             var view2 = this.$el.querySelector('.v-table-rightview');
-
             var rightViewFooter = this.$el.querySelector('.v-table-rightview .v-table-footer');
 
             view2.querySelector('.v-table-header').scrollLeft = rightViewFooter.scrollLeft;
@@ -57,7 +52,6 @@ exports.default = {
             this.unbindEvents();
 
             setTimeout(function (x) {
-
                 var body1 = _this.$el.querySelector('.v-table-leftview .v-table-body');
                 var body2 = _this.$el.querySelector('.v-table-rightview .v-table-body');
                 var rightViewFooter = _this.$el.querySelector('.v-table-rightview .v-table-footer');
@@ -68,7 +62,6 @@ exports.default = {
             });
         },
         unbindEvents: function unbindEvents() {
-
             var body1 = this.$el.querySelector('.v-table-leftview .v-table-body');
             var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
             var rightViewFooter = this.$el.querySelector('.v-table-rightview .v-table-footer');
@@ -78,13 +71,10 @@ exports.default = {
             _utils2.default.unbind(rightViewFooter, 'scroll', this.rightViewFooterScroll);
         },
         scrollToTop: function scrollToTop() {
-
             this.bodyScrollTop();
         }
     },
-
     beforeDestroy: function beforeDestroy() {
-
         this.unbindEvents();
     }
 };

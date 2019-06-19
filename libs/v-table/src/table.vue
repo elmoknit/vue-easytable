@@ -1144,9 +1144,6 @@ export default {
     clearTimeout(this.resizeTimer);
   },
   updated() {
-
-    console.log(this.hasScrollBar);
-
     if (!this.isLoading) {
       let cummulHeight = 0;
 

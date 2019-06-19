@@ -12,7 +12,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     getViewportOffset: function getViewportOffset(element) {
-
         var doc = document.documentElement,
             box = typeof element.getBoundingClientRect !== "undefined" ? element.getBoundingClientRect() : 0,
             scrollLeft = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0),
@@ -34,24 +33,20 @@ exports.default = {
     },
     bind: function bind(elem, event, handler) {
         if (elem && elem !== 'undefined' && event && handler) {
-
             event = event === 'mousewheel' ? document.onmousewheel !== undefined ? "mousewheel" : "DOMMouseScroll" : event;
 
             if (document.attachEvent) {
-
                 elem.attachEvent("on" + event, handler);
             } else {
-
                 elem.addEventListener(event, handler, false);
             }
         }
     },
     unbind: function unbind(elem, event, handler) {
         if (elem && elem !== 'undefined' && event && handler) {
-
             event = event === 'mousewheel' ? document.onmousewheel !== undefined ? "mousewheel" : "DOMMouseScroll" : event;
-
             var handlers = [];
+
             if (Array.isArray(handler) && handler.length > 0) {
                 handlers = handler;
             } else {
@@ -76,27 +71,21 @@ exports.default = {
         );
     },
     getDisplayValue: function getDisplayValue(ele) {
-
         if (ele) {
             return ele.currentStyle ? ele.currentStyle.display : getComputedStyle(ele, null).display;
         }
     },
     hasHorizontalScrollBar: function hasHorizontalScrollBar(ele) {
-
         if (ele) {
-
             return ele.scrollWidth > ele.clientWidth;
         }
     },
     hasVerticalScrollBar: function hasVerticalScrollBar(ele) {
-
         if (ele) {
-
             return ele.scrollHeight > ele.clientHeight;
         }
     },
     getScrollbarWidth: function getScrollbarWidth() {
-
         var outer = document.createElement('div');
         outer.className = _settings2.default.scrollbarClass;
         outer.style.visibility = 'hidden';
@@ -118,7 +107,6 @@ exports.default = {
         return widthNoScroll - widthWithScroll;
     },
     getParentCompByName: function getParentCompByName(context, name) {
-
         var parent = context.$parent;
 
         while (parent) {
@@ -132,19 +120,14 @@ exports.default = {
         return null;
     },
     getChildCompsByName: function getChildCompsByName(context, name) {
-
         var result = [];
-
         var childrens = context.$children;
 
         while (childrens && childrens.length > 0) {
-
             childrens.forEach(function (child) {
-
                 childrens = child.$children ? child.$children : null;
 
                 if (child.$options.name === name) {
-
                     result.push(child);
                 }
             });

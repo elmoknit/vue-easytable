@@ -1,23 +1,21 @@
 import settings from '../settings/settings'
 
 export default {
-    /*获取当前元素的left、top偏移
-    *   left：元素最左侧距离文档左侧的距离
-    *   top:元素最顶端距离文档顶端的距离
-    *   right:元素最右侧距离文档右侧的距离
-    *   bottom：元素最底端距离文档底端的距离
-    *   right2：元素最左侧距离文档右侧的距离
-    *   bottom2：元素最底端距离文档最底部的距离
-    * */
+    /* Get the left and top offset of the current element
+        * left: the leftmost distance of the element from the left side of the document
+        * top: the distance from the top of the element to the top of the document
+        * right: the distance from the right side of the document to the right of the document
+        * bottom: the distance from the bottom of the element to the bottom of the document
+        * right2: the distance from the left side of the document to the right of the document
+        * bottom2: the bottom of the element is the distance from the bottom of the document
+        * */
     getViewportOffset(element) {
-
         var doc = document.documentElement,
             box = typeof element.getBoundingClientRect !== "undefined" ? element.getBoundingClientRect() : 0,
             scrollLeft = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0),
             scrollTop = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0),
             offsetLeft = box.left + window.pageXOffset,
             offsetTop = box.top + window.pageYOffset;
-
 
         var left = offsetLeft - scrollLeft,
             top = offsetTop - scrollTop;
@@ -31,45 +29,38 @@ export default {
             bottom2: window.document.documentElement.clientHeight - top,
         }
     },
-
     /*
-     * 事件绑定
+     * Event binding
      *
      * @method bind
-     * @param  {dom||window}   elem        需要绑定的dom节点或window对象
-     * @param  {String}        event       绑定的事件名称
-     * @param  {Function}      handler     事件处理方法
+     * @param  {dom||window}   elem       The dom node or window object that needs to be bound
+     * @param  {String}        event      Bound event name
+     * @param  {Function}      handler     Event processing method
      */
-    bind(elem, event, handler){
+    bind(elem, event, handler) {
         if (elem && elem !== 'undefined' && event && handler) {
-
             event = event === 'mousewheel' ? (document.onmousewheel !== undefined ? "mousewheel" : "DOMMouseScroll") : event;
 
             if (document.attachEvent) { //if IE (and Opera depending on user setting)
-
                 elem.attachEvent("on" + event, handler);
-            }
-            else { //WC3 browsers
-
+            } else { //WC3 browsers
                 elem.addEventListener(event, handler, false);
             }
         }
     },
-
     /*
-     * 移除事件绑定
+     * Remove event binding
      *
      * @method unbind
-     * @param  {dom||window}   elem         需要移除绑定的dom节点或window对象
-     * @param  {String}        event        绑定的事件名称
-     * @param  {Function||Array<Function>}  handler    事件处理方法，可以为数组
+     * @param  {dom||window}   elem         Need to remove the bound dom node or window object
+     * @param  {String}        event        Bound event name
+     * @param  {Function||Array<Function>}  handler    Event processing method, can be an array
      */
-    unbind(elem, event, handler){
+    unbind(elem, event, handler) {
         if (elem && elem !== 'undefined' && event && handler) {
-
             event = event === 'mousewheel' ? (document.onmousewheel !== undefined ? "mousewheel" : "DOMMouseScroll") : event;
-
             var handlers = [];
+
             if (Array.isArray(handler) && handler.length > 0) {
                 handlers = handler;
             } else {
@@ -81,8 +72,7 @@ export default {
                 handlers.forEach(e => {
                     elem.removeEventListener(event, e, false);
                 })
-            }
-            else {
+            } else {
 
                 handlers.forEach(e => {
                     elem.removeEventListener('on' + event, e);
@@ -90,42 +80,30 @@ export default {
             }
         }
     },
-
-    // 判断当前是否包含html元素
-    isHtml(val){
+    // Determine if the html element is currently included
+    isHtml(val) {
         return /<[a-z][\s\S]*>/i.test(val);
     },
-
-    // 获取当前dislpay值
-    getDisplayValue(ele){
-
+    // Get the current dislpay value
+    getDisplayValue(ele) {
         if (ele) {
             return ele.currentStyle ? ele.currentStyle.display : getComputedStyle(ele, null).display;
         }
-
     },
-
     // Whether to include horizontal scroll bars
-    hasHorizontalScrollBar(ele){
-
+    hasHorizontalScrollBar(ele) {
         if (ele) {
-
             return ele.scrollWidth > ele.clientWidth;
         }
     },
-
-    // 是否包含纵向滚动条
-    hasVerticalScrollBar(ele){
-
+    // Whether to include a vertical scroll bar
+    hasVerticalScrollBar(ele) {
         if (ele) {
-
             return ele.scrollHeight > ele.clientHeight;
         }
     },
-
-    // 获取滚动条的宽度
-    getScrollbarWidth(){
-
+    // Get the width of the scroll bar
+    getScrollbarWidth() {
         const outer = document.createElement('div');
         outer.className = settings.scrollbarClass;
         outer.style.visibility = 'hidden';
@@ -145,12 +123,9 @@ export default {
         outer.parentNode.removeChild(outer);
 
         return widthNoScroll - widthWithScroll;
-
     },
-
-    // 获取父组件信息
-    getParentCompByName(context, name){
-
+    // Get parent component information
+    getParentCompByName(context, name) {
         let parent = context.$parent;
 
         while (parent) {
@@ -163,22 +138,16 @@ export default {
 
         return null;
     },
-
-    // 获取多个符合条件的子组件信息
-    getChildCompsByName(context, name){
-
+    // Get multiple eligible subcomponent information
+    getChildCompsByName(context, name) {
         let result = [];
-
         let childrens = context.$children;
 
         while (childrens && childrens.length > 0) {
-
             childrens.forEach(child => {
-
                 childrens = child.$children ? child.$children : null;
 
                 if (child.$options.name === name) {
-
                     result.push(child);
                 }
 

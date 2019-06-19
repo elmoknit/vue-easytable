@@ -12,29 +12,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     data: function data() {
-
         return {
-
             scrollbarWidth: 0
         };
     },
 
-
     methods: {
         controlScrollBar: function controlScrollBar() {
-
             if (this.hasTableFooter) {
-
                 var body = this.$el.querySelector('.v-table-rightview .v-table-body');
                 body.style.overflowX = 'hidden';
             }
         },
         setScrollbarWidth: function setScrollbarWidth() {
-
             this.scrollbarWidth = _utils2.default.getScrollbarWidth();
-        },
-        hasScrollBar: function hasScrollBar() {
-            return _utils2.default.hasHorizontalScrollBar();
         }
     }
 
