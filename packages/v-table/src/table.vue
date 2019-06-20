@@ -1184,17 +1184,17 @@ export default {
         tableLeftView.style.height = cummulHeight + 'px';
       }
     }
+
+    if (this.tableData.length > 0) {
+      $('.v-table-body-inner-pb').css('padding-bottom', '9px');
+    }
   }
 };
 </script>
 
 <style lang="css">
-.v-table-body-inner-pb {
-    padding-bottom: 9px !important;
-}
-
 .v-table-leftview {
-    margin-bottom:46px !important;;
+    margin-bottom: 46px !important;;
 }
 
 .v-table-leftview:after {
