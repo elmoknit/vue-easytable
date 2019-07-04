@@ -64,21 +64,26 @@
                           </span>
                         </span>
                         <!--filters-->
-                        <v-dropdown
-                          :data-testid="col.field + '_filter'"
-                          class="v-table-dropdown"
-                          v-if="enableFilters(col.filters, col.fields)"
-                          v-model="col.filters"
-                          :show-operation="col.filterMultiple"
-                          :is-multiple="col.filterMultiple"
-                          :confirm-label="confirmLabel"
-                          :reset-label="resetLabel"
-                          :placeholder-search="placeholderSearch"
-                          @on-filter-method="filterEvent"
-                          @change="filterConditionChange(col.filterMultiple)"
-                        >
-                          <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
-                        </v-dropdown>
+                        <span v-if="!col.customFilter">
+                            <v-dropdown
+                              :data-testid="col.field + '_filter'"
+                              class="v-table-dropdown"
+                              v-if="enableFilters(col.filters, col.fields)"
+                              v-model="col.filters"
+                              :show-operation="col.filterMultiple"
+                              :is-multiple="col.filterMultiple"
+                              :confirm-label="confirmLabel"
+                              :reset-label="resetLabel"
+                              :placeholder-search="placeholderSearch"
+                              @on-filter-method="filterEvent"
+                              @change="filterConditionChange(col.filterMultiple)"
+                            >
+                              <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
+                            </v-dropdown>
+                        </span>
+                        <span v-else>
+                            <component :is="col.customFilter"></component>
+                        </span>
                       </div>
                     </td>
                   </tr>
@@ -132,21 +137,26 @@
                           </span>
                         </span>
                         <!--filters-->
-                        <v-dropdown
-                          :data-testid="col.field + '_filter'"
-                          class="v-table-dropdown"
-                          v-if="enableFilters(col.filters)"
-                          v-model="col.filters"
-                          :show-operation="col.filterMultiple"
-                          :is-multiple="col.filterMultiple"
-                          :confirm-label="confirmLabel"
-                          :reset-label="resetLabel"
-                          :placeholder-search="placeholderSearch"
-                          @on-filter-method="filterEvent"
-                          @change="filterConditionChange(col.filterMultiple)"
-                        >
-                          <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
-                        </v-dropdown>
+                        <span v-if="!col.customFilter">
+                            <v-dropdown
+                              :data-testid="col.field + '_filter'"
+                              class="v-table-dropdown"
+                              v-if="enableFilters(col.filters)"
+                              v-model="col.filters"
+                              :show-operation="col.filterMultiple"
+                              :is-multiple="col.filterMultiple"
+                              :confirm-label="confirmLabel"
+                              :reset-label="resetLabel"
+                              :placeholder-search="placeholderSearch"
+                              @on-filter-method="filterEvent"
+                              @change="filterConditionChange(col.filterMultiple)"
+                            >
+                              <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
+                            </v-dropdown>
+                        </span>
+                          <span v-else>
+                          <component :is="col.customFilter"></component>
+                        </span>
                       </div>
                     </td>
                   </tr>
@@ -345,21 +355,26 @@
                         </span>
                       </span>
                       <!--filters-->
-                      <v-dropdown
-                        :data-testid="col.field + '_filter'"
-                        class="v-table-dropdown"
-                        v-if="enableFilters(col.filters, col.fields)"
-                        v-model="col.filters"
-                        :show-operation="col.filterMultiple"
-                        :is-multiple="col.filterMultiple"
-                        :confirm-label="confirmLabel"
-                        :reset-label="resetLabel"
-                        :placeholder-search="placeholderSearch"
-                        @on-filter-method="filterEvent"
-                        @change="filterConditionChange(col.filterMultiple)"
-                      >
-                        <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
-                      </v-dropdown>
+                      <span v-if="!col.customFilter">
+                        <v-dropdown
+                          :data-testid="col.field + '_filter'"
+                          class="v-table-dropdown"
+                          v-if="enableFilters(col.filters, col.fields)"
+                          v-model="col.filters"
+                          :show-operation="col.filterMultiple"
+                          :is-multiple="col.filterMultiple"
+                          :confirm-label="confirmLabel"
+                          :reset-label="resetLabel"
+                          :placeholder-search="placeholderSearch"
+                          @on-filter-method="filterEvent"
+                          @change="filterConditionChange(col.filterMultiple)"
+                        >
+                          <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
+                        </v-dropdown>
+                      </span>
+                      <span v-else>
+                        <component :is="col.customFilter"></component>
+                      </span>
                     </div>
                   </td>
                 </tr>
@@ -408,21 +423,26 @@
                           ></i>
                         </span>
                         <!--filters-->
-                        <v-dropdown
-                          :data-testid="col.field + '_filter'"
-                          class="v-table-dropdown"
-                          v-if="enableFilters(col.filters)"
-                          v-model="col.filters"
-                          :confirm-label="confirmLabel"
-                          :reset-label="resetLabel"
-                          :placeholder-search="placeholderSearch"
-                          :show-operation="col.filterMultiple"
-                          :is-multiple="col.filterMultiple"
-                          @on-filter-method="filterEvent"
-                          @change="filterConditionChange(col.filterMultiple)"
-                        >
-                          <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
-                        </v-dropdown>
+                        <span v-if="!col.customFilter">
+                          <v-dropdown
+                            :data-testid="col.field + '_filter'"
+                            class="v-table-dropdown"
+                            v-if="enableFilters(col.filters)"
+                            v-model="col.filters"
+                            :confirm-label="confirmLabel"
+                            :reset-label="resetLabel"
+                            :placeholder-search="placeholderSearch"
+                            :show-operation="col.filterMultiple"
+                            :is-multiple="col.filterMultiple"
+                            @on-filter-method="filterEvent"
+                            @change="filterConditionChange(col.filterMultiple)"
+                          >
+                            <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
+                          </v-dropdown>
+                        </span>
+                        <span v-else>
+                          <component :is="col.customFilter"></component>
+                        </span>
                       </span>
                     </div>
                   </td>
