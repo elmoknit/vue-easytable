@@ -1193,6 +1193,7 @@ export default {
           height = rightRow.offsetHeight > height ? rightRow.offsetHeight : height;
 
           rightRow.style.height = null;
+          rightRow.style.height = null;
           leftRow.style.height = null;
 
           leftRow.style.height = height + 'px';
@@ -1212,9 +1213,21 @@ export default {
         }
 
         if (cummulHeight < this.bodyViewHeight + 20) {
-          tableLeftView.style.height = cummulHeight + 38 + 'px';
-          tableLeftBody.style.height = cummulHeight + 'px';
-          tableRightBody.style.height = cummulHeight + 'px';
+          let columnsCummulsWidth = 0;
+          this.internalColumns.forEach(columnWidth => {
+            columnsCummulsWidth += columnWidth.width;
+          });
+
+          if (this.rightViewWidth < columnsCummulsWidth) {
+            tableLeftView.style.height = cummulHeight + 38 + 8 + 'px'; // add header height
+
+            tableLeftBody.style.height = cummulHeight + 8 + 'px';
+            tableRightBody.style.height = cummulHeight + 8 + 'px';
+          } else {
+            tableLeftView.style.height = cummulHeight + 38 + 'px'; // add header height
+            tableLeftBody.style.height = cummulHeight + 'px';
+            tableRightBody.style.height = cummulHeight + 'px';
+          }
         }
       }
     }
