@@ -65,24 +65,24 @@
                         </span>
                         <!--filters-->
                         <span v-if="!col.customFilter">
-                            <v-dropdown
-                              :data-testid="col.field + '_filter'"
-                              class="v-table-dropdown"
-                              v-if="enableFilters(col.filters, col.fields)"
-                              v-model="col.filters"
-                              :show-operation="col.filterMultiple"
-                              :is-multiple="col.filterMultiple"
-                              :confirm-label="confirmLabel"
-                              :reset-label="resetLabel"
-                              :placeholder-search="placeholderSearch"
-                              @on-filter-method="filterEvent"
-                              @change="filterConditionChange(col.filterMultiple)"
-                            >
-                              <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
-                            </v-dropdown>
+                          <v-dropdown
+                            :data-testid="col.field + '_filter'"
+                            class="v-table-dropdown"
+                            v-if="enableFilters(col.filters, col.fields)"
+                            v-model="col.filters"
+                            :show-operation="col.filterMultiple"
+                            :is-multiple="col.filterMultiple"
+                            :confirm-label="confirmLabel"
+                            :reset-label="resetLabel"
+                            :placeholder-search="placeholderSearch"
+                            @on-filter-method="filterEvent"
+                            @change="filterConditionChange(col.filterMultiple)"
+                          >
+                            <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
+                          </v-dropdown>
                         </span>
                         <span v-else>
-                            <component :is="col.customFilter"></component>
+                          <component :is="col.customFilter"></component>
                         </span>
                       </div>
                     </td>
@@ -138,23 +138,23 @@
                         </span>
                         <!--filters-->
                         <span v-if="!col.customFilter">
-                            <v-dropdown
-                              :data-testid="col.field + '_filter'"
-                              class="v-table-dropdown"
-                              v-if="enableFilters(col.filters)"
-                              v-model="col.filters"
-                              :show-operation="col.filterMultiple"
-                              :is-multiple="col.filterMultiple"
-                              :confirm-label="confirmLabel"
-                              :reset-label="resetLabel"
-                              :placeholder-search="placeholderSearch"
-                              @on-filter-method="filterEvent"
-                              @change="filterConditionChange(col.filterMultiple)"
-                            >
-                              <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
-                            </v-dropdown>
+                          <v-dropdown
+                            :data-testid="col.field + '_filter'"
+                            class="v-table-dropdown"
+                            v-if="enableFilters(col.filters)"
+                            v-model="col.filters"
+                            :show-operation="col.filterMultiple"
+                            :is-multiple="col.filterMultiple"
+                            :confirm-label="confirmLabel"
+                            :reset-label="resetLabel"
+                            :placeholder-search="placeholderSearch"
+                            @on-filter-method="filterEvent"
+                            @change="filterConditionChange(col.filterMultiple)"
+                          >
+                            <i :class="['fas fa-filter', vTableFiltersIcon(col.filters)]"></i>
+                          </v-dropdown>
                         </span>
-                          <span v-else>
+                        <span v-else>
                           <component :is="col.customFilter"></component>
                         </span>
                       </div>
@@ -166,7 +166,10 @@
           </div>
         </div>
         <!--Left column content-->
-        <div class="v-table-body v-table-body-class" :style="{ width: leftViewWidth + 'px' }">
+        <div
+          class="v-table-body v-table-body-class"
+          :style="{ width: leftViewWidth + 'px', height: bodyViewHeight + 'px' }"
+        >
           <div :class="['v-table-body-inner', vTableBodyInner]">
             <v-checkbox-group v-model="checkboxGroupModel" @change="handleCheckGroupChange">
               <table class="v-table-btable" cellspacing="0" cellpadding="0" border="0">
@@ -453,7 +456,10 @@
         </div>
       </div>
       <!--Right column content-->
-      <div :class="['v-table-body v-table-body-class', vTableRightBody]" :style="{ width: rightViewWidth + 'px' }">
+      <div
+        :class="['v-table-body v-table-body-class', vTableRightBody]"
+        :style="{ width: rightViewWidth + 'px', height: bodyViewHeight + 'px' }"
+      >
         <v-checkbox-group v-model="checkboxGroupModel" @change="handleCheckGroupChange">
           <table class="v-table-btable" cellspacing="0" cellpadding="0" border="0">
             <tbody>
@@ -1197,11 +1203,19 @@ export default {
       }
 
       let tableLeftView = $('.v-table-leftview')[0];
+      let tableLeftBody = $('.v-table-body')[0];
+      let tableRightBody = $('.v-table-body')[1];
+
       if (tableLeftView) {
         if (this.footerTotalHeight > 0) {
           cummulHeight += this.footerTotalHeight;
         }
-        tableLeftView.style.height = cummulHeight + 'px';
+
+        if (cummulHeight < this.bodyViewHeight + 20) {
+          tableLeftView.style.height = cummulHeight + 38 + 'px';
+          tableLeftBody.style.height = cummulHeight + 'px';
+          tableRightBody.style.height = cummulHeight + 'px';
+        }
       }
     }
 
@@ -1211,17 +1225,3 @@ export default {
   }
 };
 </script>
-
-<style lang="css">
-.v-table-leftview {
-    margin-bottom: 46px !important;;
-}
-
-.v-table-leftview:after {
-    bottom: -46px !important;
-}
-
-.v-table-leftview:before {
-    bottom: -46px !important;
-}
-</style>
