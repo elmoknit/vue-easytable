@@ -39,7 +39,7 @@
                           'text-align': col.titleAlign
                         }"
                       >
-                        <span class="table-title">
+                        <span class="table-title" :data-testid="'column_header_' + col.field">
                           <span v-if="isSelectionCol(col.fields)">
                             <v-checkbox
                               @change="handleCheckAll"
@@ -112,7 +112,7 @@
                           'text-align': col.titleAlign
                         }"
                       >
-                        <span class="table-title">
+                        <span class="table-title" :data-testid="'column_header_' + col.field">
                           <span v-if="col.type === 'selection'">
                             <v-checkbox
                               @change="handleCheckAll"
@@ -333,7 +333,7 @@
                         'text-align': col.titleAlign
                       }"
                     >
-                      <span class="table-title">
+                      <span class="table-title" :data-testid="'column_header_' + col.field">
                         <span v-if="isSelectionCol(col.fields)">
                           <v-checkbox
                             @change="handleCheckAll"
@@ -402,7 +402,7 @@
                       ]"
                       :style="{ width: col.width + 'px', height: titleRowHeight + 'px', 'text-align': col.titleAlign }"
                     >
-                      <span class="table-title">
+                      <span class="table-title" :data-testid="'column_header_' + col.field">
                         <span v-if="col.type === 'selection'">
                           <v-checkbox
                             @change="handleCheckAll"
