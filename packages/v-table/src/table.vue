@@ -1207,6 +1207,8 @@ export default {
       let tableLeftBody = $('.v-table-body')[0];
       let tableRightBody = $('.v-table-body')[1];
 
+      tableLeftView = tableLeftBody;
+
       if (tableLeftView) {
         if (this.footerTotalHeight > 0) {
           cummulHeight += this.footerTotalHeight;
