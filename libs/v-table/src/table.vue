@@ -1208,9 +1208,10 @@ export default {
       let tableRightBody = $('.v-table-body')[1];
 
       if (tableLeftView && tableLeftBody && tableRightBody) {
-        if (this.footerTotalHeight < 0) {
+        if (this.footerTotalHeight === 0) {
           if (cummulHeight < window.innerHeight - 320) {
             let columnsCummulsWidth = 0;
+
             this.internalColumns.forEach(columnWidth => {
               columnsCummulsWidth += columnWidth.width;
             });
