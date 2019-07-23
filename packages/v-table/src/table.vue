@@ -1207,28 +1207,23 @@ export default {
       let tableLeftBody = $('.v-table-body')[0];
       let tableRightBody = $('.v-table-body')[1];
 
-      tableLeftView = tableLeftBody;
+      if (tableLeftView && tableLeftBody && tableRightBody) {
+        if (this.footerTotalHeight < 0) {
+          if (cummulHeight < window.innerHeight - 320) {
+            let columnsCummulsWidth = 0;
+            this.internalColumns.forEach(columnWidth => {
+              columnsCummulsWidth += columnWidth.width;
+            });
 
-      if (tableLeftView) {
-        if (this.footerTotalHeight > 0) {
-          cummulHeight += this.footerTotalHeight;
-        }
-
-        if (cummulHeight < this.bodyViewHeight + 20) {
-          let columnsCummulsWidth = 0;
-          this.internalColumns.forEach(columnWidth => {
-            columnsCummulsWidth += columnWidth.width;
-          });
-
-          if (this.rightViewWidth < columnsCummulsWidth) {
-            tableLeftView.style.height = cummulHeight + 38 + 8 + 'px'; // add header height
-
-            tableLeftBody.style.height = cummulHeight + 8 + 'px';
-            tableRightBody.style.height = cummulHeight + 8 + 'px';
-          } else {
-            tableLeftView.style.height = cummulHeight + 38 + 'px'; // add header height
-            tableLeftBody.style.height = cummulHeight + 'px';
-            tableRightBody.style.height = cummulHeight + 'px';
+            if (this.rightViewWidth < columnsCummulsWidth) {
+              tableLeftView.style.height = cummulHeight + 38 + 8 + 'px'; // add header height
+              tableLeftBody.style.height = cummulHeight + 8 + 'px';
+              tableRightBody.style.height = cummulHeight + 8 + 'px';
+            } else {
+              tableLeftView.style.height = cummulHeight + 38 + 'px'; // add header height
+              tableLeftBody.style.height = cummulHeight + 'px';
+              tableRightBody.style.height = cummulHeight + 'px';
+            }
           }
         }
       }
