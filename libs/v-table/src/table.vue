@@ -1212,8 +1212,8 @@ export default {
           if (cummulHeight < window.innerHeight - 320) {
             let columnsCummulsWidth = 0;
 
-            this.internalColumns.forEach(columnWidth => {
-              columnsCummulsWidth += columnWidth.width;
+            this.internalColumns.forEach(column => {
+              columnsCummulsWidth += column.width;
             });
 
             if (this.rightViewWidth < columnsCummulsWidth) {
