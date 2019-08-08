@@ -241,7 +241,7 @@
                       >
                         <span v-if="typeof col.componentName === 'string' && col.componentName.length > 0">
                           <component
-                            :data-testid="col.field + 'Index' + rowIndex"
+                            :data-testid="col.field + '_index' + rowIndex"
                             :rowData="item"
                             :field="col.field ? col.field : ''"
                             :index="rowIndex"
@@ -253,7 +253,7 @@
                           v-else-if="typeof col.formatter === 'function'"
                           v-html="col.formatter(item, rowIndex, pagingIndex, col.field)"
                         ></span>
-                        <span v-else-if="col.type === 'selection'" :data-testid="col.field + 'Index' + rowIndex">
+                        <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index' + rowIndex">
                           <v-checkbox
                             @change="handleCheckChange(item)"
                             :show-slot="false"
@@ -261,7 +261,7 @@
                             :label="rowIndex"
                           ></v-checkbox>
                         </span>
-                        <span v-else :data-testid="col.field + 'Index' + rowIndex">
+                        <span v-else :data-testid="col.field + '_index' + rowIndex">
                           {{ item[col.field] }}
                         </span>
                       </div>
@@ -526,7 +526,7 @@
                   >
                     <span
                       v-if="typeof col.componentName === 'string' && col.componentName.length > 0"
-                      :data-testid="col.field + 'Index' + rowIndex"
+                      :data-testid="col.field + '_index' + rowIndex"
                     >
                       <component
                         :rowData="item"
@@ -539,10 +539,10 @@
                     <span
                       v-else-if="typeof col.formatter === 'function'"
                       v-html="col.formatter(item, rowIndex, pagingIndex, col.field)"
-                      :data-testid="col.field + 'Index' + rowIndex"
+                      :data-testid="col.field + '_index' + rowIndex"
                     >
                     </span>
-                    <span v-else-if="col.type === 'selection'" :data-testid="col.field + 'Index' + rowIndex">
+                    <span v-else-if="col.type === 'selection'" :data-testid="col.field + '_index' + rowIndex">
                       <v-checkbox
                         @change="handleCheckChange(item)"
                         :show-slot="false"
@@ -550,7 +550,7 @@
                         :label="rowIndex"
                       ></v-checkbox>
                     </span>
-                    <span v-else :data-testid="col.field + 'Index' + rowIndex">
+                    <span v-else :data-testid="col.field + '_index' + rowIndex">
                       {{ item[col.field] }}
                     </span>
                   </div>
@@ -1212,8 +1212,8 @@ export default {
           if (cummulHeight < window.innerHeight - 320) {
             let columnsCummulsWidth = 0;
 
-            this.internalColumns.forEach(column => {
-              columnsCummulsWidth += column.width;
+            this.internalColumns.forEach(columnWidth => {
+              columnsCummulsWidth += columnWidth.width;
             });
 
             if (this.rightViewWidth < columnsCummulsWidth) {
