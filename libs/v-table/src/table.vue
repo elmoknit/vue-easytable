@@ -39,7 +39,7 @@
                           'text-align': col.titleAlign
                         }"
                       >
-                        <span class="table-title" :data-testid="'column_header_' + col.field">
+                        <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
                           <span v-if="isSelectionCol(col.fields)">
                             <v-checkbox
                               @change="handleCheckAll"
@@ -112,7 +112,7 @@
                           'text-align': col.titleAlign
                         }"
                       >
-                        <span class="table-title" :data-testid="'column_header_' + col.field">
+                        <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
                           <span v-if="col.type === 'selection'">
                             <v-checkbox
                               @change="handleCheckAll"
@@ -333,7 +333,7 @@
                         'text-align': col.titleAlign
                       }"
                     >
-                      <span class="table-title" :data-testid="'column_header_' + col.field">
+                      <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
                         <span v-if="isSelectionCol(col.fields)">
                           <v-checkbox
                             @change="handleCheckAll"
@@ -402,7 +402,7 @@
                       ]"
                       :style="{ width: col.width + 'px', height: titleRowHeight + 'px', 'text-align': col.titleAlign }"
                     >
-                      <span class="table-title" :data-testid="'column_header_' + col.field">
+                      <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
                         <span v-if="col.type === 'selection'">
                           <v-checkbox
                             @change="handleCheckAll"
@@ -1212,8 +1212,8 @@ export default {
           if (cummulHeight < window.innerHeight - 320) {
             let columnsCummulsWidth = 0;
 
-            this.internalColumns.forEach(columnWidth => {
-              columnsCummulsWidth += columnWidth.width;
+            this.internalColumns.forEach(column => {
+              columnsCummulsWidth += column.width;
             });
 
             if (this.rightViewWidth < columnsCummulsWidth) {
