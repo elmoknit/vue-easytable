@@ -1242,10 +1242,18 @@ export default {
           if (this.rightViewWidth < columnsCummulsWidth) {
             let tableFooter = $('.v-table-footer')[0];
             tableFooter.style.height = this.footerTotalHeight + 8 + 'px';
-            tableLeftView.style.height = cummulHeight + this.footerTotalHeight + 38 + 8 + 'px'; // add header height
+
+            if (cummulHeight < window.innerHeight - 460 - this.footerTotalHeight) {
+              tableLeftView.style.height = cummulHeight + this.footerTotalHeight + 38 + 8 + 'px'; // add header height
+            } else {
+              tableLeftView.style.height = window.innerHeight - 460 - this.footerTotalHeight;
+            }
           }
-          tableLeftBody.style.height = cummulHeight + 'px';
-          tableRightBody.style.height = cummulHeight + 'px';
+
+          if (cummulHeight < window.innerHeight - 460 - this.footerTotalHeight) {
+            tableLeftBody.style.height = cummulHeight + 'px';
+            tableRightBody.style.height = cummulHeight + 'px';
+          }
         }
       }
     }
