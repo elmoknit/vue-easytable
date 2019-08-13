@@ -39,7 +39,10 @@
                           'text-align': col.titleAlign
                         }"
                       >
-                        <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
+                        <span
+                          class="table-title"
+                          :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)"
+                        >
                           <span v-if="isSelectionCol(col.fields)">
                             <v-checkbox
                               @change="handleCheckAll"
@@ -112,7 +115,10 @@
                           'text-align': col.titleAlign
                         }"
                       >
-                        <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
+                        <span
+                          class="table-title"
+                          :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)"
+                        >
                           <span v-if="col.type === 'selection'">
                             <v-checkbox
                               @change="handleCheckAll"
@@ -333,7 +339,10 @@
                         'text-align': col.titleAlign
                       }"
                     >
-                      <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
+                      <span
+                        class="table-title"
+                        :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)"
+                      >
                         <span v-if="isSelectionCol(col.fields)">
                           <v-checkbox
                             @change="handleCheckAll"
@@ -402,7 +411,10 @@
                       ]"
                       :style="{ width: col.width + 'px', height: titleRowHeight + 'px', 'text-align': col.titleAlign }"
                     >
-                      <span class="table-title" :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)">
+                      <span
+                        class="table-title"
+                        :data-testid="'columnHeader' + col.field.charAt(0).toUpperCase() + col.field.slice(1)"
+                      >
                         <span v-if="col.type === 'selection'">
                           <v-checkbox
                             @change="handleCheckAll"
@@ -1207,15 +1219,15 @@ export default {
       let tableLeftBody = $('.v-table-body')[0];
       let tableRightBody = $('.v-table-body')[1];
 
+      let columnsCummulsWidth = 0;
+
+      this.internalColumns.forEach(columnWidth => {
+        columnsCummulsWidth += columnWidth.width;
+      });
+
       if (tableLeftView && tableLeftBody && tableRightBody) {
         if (this.footerTotalHeight === 0) {
           if (cummulHeight < window.innerHeight - 320) {
-            let columnsCummulsWidth = 0;
-
-            this.internalColumns.forEach(columnWidth => {
-              columnsCummulsWidth += columnWidth.width;
-            });
-
             if (this.rightViewWidth < columnsCummulsWidth) {
               tableLeftView.style.height = cummulHeight + 38 + 8 + 'px'; // add header height
               tableLeftBody.style.height = cummulHeight + 8 + 'px';
@@ -1226,6 +1238,14 @@ export default {
               tableRightBody.style.height = cummulHeight + 'px';
             }
           }
+        } else {
+          if (this.rightViewWidth < columnsCummulsWidth) {
+            let tableFooter = $('.v-table-footer')[0];
+            tableFooter.style.height = this.footerTotalHeight + 8 + 'px';
+            tableLeftView.style.height = cummulHeight + this.footerTotalHeight + 38 + 8 + 'px'; // add header height
+          }
+          tableLeftBody.style.height = cummulHeight + 'px';
+          tableRightBody.style.height = cummulHeight + 'px';
         }
       }
     }
