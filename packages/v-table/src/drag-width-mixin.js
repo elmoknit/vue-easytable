@@ -1,9 +1,10 @@
 // 列宽度拖动
 import utils from '../../src/utils/utils.js'
-import {hasClass, addClass, removeClass} from '../../src/utils/dom.js'
+import {addClass, hasClass, removeClass} from '../../src/utils/dom.js'
+
 export default {
 
-    data(){
+    data() {
         return {
 
             draggingColumn: null, // 当前拖动的列
@@ -16,9 +17,9 @@ export default {
 
     methods: {
 
-        handleTitleMouseMove(event, column){
+        handleTitleMouseMove(event, column) {
 
-            if (!this.columnWidthDrag){
+            if (!this.columnWidthDrag) {
                 return false;
             }
 
@@ -33,8 +34,7 @@ export default {
 
                 if (column.length > 1) {
                     return false;
-                }
-                else {
+                } else {
                     column = column[0];
                 }
             }
@@ -75,7 +75,7 @@ export default {
             }
         },
 
-        handleTitleMouseOut(){
+        handleTitleMouseOut() {
 
             if (!this.isDragging) {
 
@@ -83,7 +83,7 @@ export default {
             }
         },
 
-        handleTitleMouseDown(event, column){
+        handleTitleMouseDown(event, column) {
 
             if (!this.draggingColumn || !this.showVerticalBorder) {
                 return false;
@@ -106,7 +106,7 @@ export default {
             utils.bind(document, 'mouseup', this.handleDragMouseUp);
         },
 
-        handleDragMouseMove(e){
+        handleDragMouseMove(e) {
 
             if (!this.isDragging) {
                 return false;
@@ -115,7 +115,7 @@ export default {
             this.setDragLinePosition(e);
         },
 
-        setDragLinePosition(e){
+        setDragLinePosition(e) {
 
             const tableLeft = utils.getViewportOffset(this.$el).left,
                 dragLine = this.$el.querySelector('.v-table-drag-line'),
@@ -129,7 +129,7 @@ export default {
         },
 
         // 拖动时mouseup
-        handleDragMouseUp(e){
+        handleDragMouseUp(e) {
 
             if (!this.isDragging) {
                 return false;
@@ -159,20 +159,20 @@ export default {
 
             if (this.totalColumnsWidth < this.internalWidth) {
 
-                if (!hasTableFooter){
+                if (!hasTableFooter) {
 
                     rightViewBody.style.overflowX = 'hidden';
 
                     removeClass(rightViewBody, 'v-table-rightview-special-border');
                     rightViewBody.classList.remove('v-table-rightview-special-border');
 
-                }else{
+                } else {
 
                     rightViewFooter.style.overflowX = 'hidden';
                 }
             } else {
 
-                if (!hasTableFooter){
+                if (!hasTableFooter) {
 
                     rightViewBody.style.overflowX = 'scroll';
 
@@ -181,7 +181,7 @@ export default {
                         addClass(rightViewBody, 'v-table-rightview-special-border');
                     }
 
-                }else{
+                } else {
 
                     rightViewFooter.style.overflowX = 'scroll';
                 }

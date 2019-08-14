@@ -38,6 +38,7 @@ exports.default = {
             }
 
             view2.querySelector('.v-table-header').scrollLeft = body2.scrollLeft;
+            view2.querySelector('.v-table-rightview .v-table-footer').scrollLeft = body2.scrollLeft;
         },
         rightViewFooterScroll: function rightViewFooterScroll() {
             var view2 = this.$el.querySelector('.v-table-rightview');
