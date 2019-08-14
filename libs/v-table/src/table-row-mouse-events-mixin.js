@@ -68,6 +68,8 @@ exports.default = {
             return result;
         },
         setRowBgColor: function setRowBgColor(newVal, oldVal, color) {
+            var _this = this;
+
             var el = this.$el;
 
             if (!el) {
