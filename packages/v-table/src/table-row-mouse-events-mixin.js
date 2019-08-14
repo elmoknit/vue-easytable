@@ -100,17 +100,17 @@ export default {
                 newRow = rows[newVal];
 
                 if (oldRow) {
-                    oldRow.style.backgroundColor = _this.getHighPriorityBgColor(oldVal);
-                    oldRow.childNodes.forEach(function(cell) {
+                    oldRow.style.backgroundColor = this.getHighPriorityBgColor(oldVal);
+                    oldRow.childNodes.forEach(function (cell) {
                         cell.style.removeProperty("background-color");
-                    })
+                    });
                 }
 
                 if (newRow) {
                     newRow.style.backgroundColor = color;
-                    newRow.childNodes.forEach(function(cell) {
-                        cell.style.backgroundColor =color;
-                    })
+                    newRow.childNodes.forEach(function (cell) {
+                        cell.style.backgroundColor = color;
+                    });
                 }
             })
         },
