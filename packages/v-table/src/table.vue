@@ -583,6 +583,7 @@
           <tr class="v-table-row" v-for="(item, rowIndex) in noFrozenFooterCols">
             <td v-for="(col, colIndex) in item" :class="setFooterCellClassName(false, rowIndex, colIndex, col.content)">
               <div
+                :data-testid="'footer_colIndex' + colIndex + '_index' + rowIndex"
                 :style="{
                   height: footerRowHeight + 'px',
                   'line-height': footerRowHeight + 'px',
