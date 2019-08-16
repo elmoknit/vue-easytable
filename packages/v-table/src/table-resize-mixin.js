@@ -178,11 +178,9 @@ export  default {
             if (currentWidth <= initResizeWidths && !this.isTableEmpty) {// 排除表格无数据的影响
 
                 if (this.hasTableFooter) {
-
                     rightViewFooter.style.overflowX = 'scroll';
-
+                    rightViewBody.style.overflowX = 'scroll';
                 } else {
-
                     rightViewBody.style.overflowX = 'scroll';
                 }
 

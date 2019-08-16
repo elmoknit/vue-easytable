@@ -12,6 +12,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     methods: {
+        mouseEnterBody2: function mouseEnterBody2(e) {
+            var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
+            _utils2.default.bind(body2, 'scroll', this.body2Scroll);
+        },
+        mouseLeaveBody2: function mouseLeaveBody2(e) {
+            var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
+            _utils2.default.unbind(body2, 'scroll', this.body2Scroll);
+        },
+        mouseEnterRightViewFooter: function mouseEnterRightViewFooter(e) {
+            var rightViewFooter = this.$el.querySelector('.v-table-rightview .v-table-footer');
+            _utils2.default.bind(rightViewFooter, 'scroll', this.rightViewFooterScroll);
+        },
+        mouseLeaveRightViewFooter: function mouseLeaveRightViewFooter(e) {
+            var rightViewFooter = this.$el.querySelector('.v-table-rightview .v-table-footer');
+            _utils2.default.unbind(rightViewFooter, 'scroll', this.rightViewFooterScroll);
+        },
         body1Mousewheel: function body1Mousewheel(e) {
             var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
             var e1 = e.originalEvent || window.event || e;
@@ -58,8 +74,15 @@ exports.default = {
                 var rightViewFooter = _this.$el.querySelector('.v-table-rightview .v-table-footer');
 
                 _utils2.default.bind(body1, 'mousewheel', _this.body1Mousewheel);
-                _utils2.default.bind(body2, 'scroll', _this.body2Scroll);
-                _utils2.default.bind(rightViewFooter, 'scroll', _this.rightViewFooterScroll);
+                _utils2.default.bind(body2, 'mouseenter', _this.mouseEnterBody2);
+                _utils2.default.bind(body2, 'scroll', _this.body2Scroll());
+                _utils2.default.bind(body2, 'mouseleave', _this.mouseLeaveBody2);
+                _utils2.default.bind(rightViewFooter, 'mouseenter', _this.mouseEnterRightViewFooter);
+                _utils2.default.bind(rightViewFooter, 'mouseleave', _this.mouseLeaveRightViewFooter);
+
+                if (rightViewFooter) {
+                    body2.classList.remove("v-scrollbar-wrap");
+                }
             });
         },
         unbindEvents: function unbindEvents() {
@@ -68,8 +91,11 @@ exports.default = {
             var rightViewFooter = this.$el.querySelector('.v-table-rightview .v-table-footer');
 
             _utils2.default.unbind(body1, 'mousewheel', this.body1Mousewheel);
+            _utils2.default.unbind(body2, 'mouseenter', this.mouseEnterBody2);
             _utils2.default.unbind(body2, 'scroll', this.body2Scroll);
-            _utils2.default.unbind(rightViewFooter, 'scroll', this.rightViewFooterScroll);
+            _utils2.default.unbind(body2, 'mouseleave', this.mouseLeaveBody2);
+            _utils2.default.unbind(rightViewFooter, 'mouseenter', this.mouseEnterRightViewFooter);
+            _utils2.default.unbind(rightViewFooter, 'mouseleave', this.mouseLeaveRightViewFooter);
         },
         scrollToTop: function scrollToTop() {
             this.bodyScrollTop();

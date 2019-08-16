@@ -163,10 +163,9 @@ exports.default = {
             if (currentWidth <= initResizeWidths && !this.isTableEmpty) {
 
                 if (this.hasTableFooter) {
-
                     rightViewFooter.style.overflowX = 'scroll';
+                    rightViewBody.style.overflowX = 'scroll';
                 } else {
-
                     rightViewBody.style.overflowX = 'scroll';
                 }
 
