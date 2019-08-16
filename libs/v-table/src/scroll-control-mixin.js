@@ -48,13 +48,17 @@ exports.default = {
             var view2 = this.$el.querySelector('.v-table-rightview');
             var body1 = this.$el.querySelector('.v-table-leftview .v-table-body');
             var body2 = this.$el.querySelector('.v-table-rightview .v-table-body');
+            var rightViewFooter = this.$el.querySelector('.v-table-rightview .v-table-footer');
 
             if (body1) {
                 body1.scrollTop = body2.scrollTop;
             }
 
             view2.querySelector('.v-table-header').scrollLeft = body2.scrollLeft;
-            view2.querySelector('.v-table-rightview .v-table-footer').scrollLeft = body2.scrollLeft;
+
+            if (rightViewFooter) {
+                view2.querySelector('.v-table-rightview .v-table-footer').scrollLeft = body2.scrollLeft;
+            }
         },
         rightViewFooterScroll: function rightViewFooterScroll() {
             var view2 = this.$el.querySelector('.v-table-rightview');
