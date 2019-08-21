@@ -1238,6 +1238,8 @@ export default {
               tableLeftBody.style.height = cummulHeight + 'px';
               tableRightBody.style.height = cummulHeight + 'px';
             }
+          } else {
+            tableLeftView.style.height = window.innerHeight - 311 + 'px';
           }
         } else {
           if (this.rightViewWidth < columnsCummulsWidth) {
